@@ -1,3 +1,4 @@
 build
-out
+out/*
+!out/example.png
 optica
