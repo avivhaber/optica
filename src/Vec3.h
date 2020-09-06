@@ -1,0 +1,33 @@
+#pragma once
+
+namespace constants {
+    inline constexpr float PI {3.1415927};
+}
+
+class Vec3 {
+    public:
+        float x;
+        float y;
+        float z;
+
+        Vec3(float x = 0, float y = 0, float z = 0);
+        
+        Vec3& operator+=(const Vec3& v);
+        Vec3& operator-=(const Vec3& v);
+        Vec3& operator*=(const float s);
+        Vec3& operator/=(const float s);
+        Vec3 operator+(const Vec3& v) const;
+        Vec3 operator-(const Vec3& v) const;
+        Vec3 operator*(const float s) const;
+        Vec3 operator/(const float s) const;
+        Vec3 operator-() const;
+
+        static float dot(const Vec3& u, const Vec3& v);
+        static Vec3 cross(const Vec3& u, const Vec3& v);
+        static float angle(const Vec3& u, const Vec3& v);
+        static float distance(const Vec3& u, const Vec3& v);
+        static float distance2(const Vec3& u, const Vec3& v);
+        float length() const;
+        float length2() const;
+        Vec3 normalize();
+};
