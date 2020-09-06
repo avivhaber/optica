@@ -1,9 +1,10 @@
 #pragma once
 
-namespace constants {
-    inline constexpr float PI {3.1415927};
-}
-
+/*
+A class for representing geometric vectors in 3-dimensions.
+A Vec3 is considered invalid if any of its components are Nan.
+This can be checked with isValdid().
+*/
 class Vec3 {
     public:
         float x;
@@ -30,4 +31,8 @@ class Vec3 {
         float length() const;
         float length2() const;
         Vec3 normalize();
+        bool isValid();
 };
+
+// Type aliases
+using Point = Vec3;

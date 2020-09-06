@@ -1,7 +1,7 @@
 #include "Vec3.h"
 #include <cmath>
 
-Vec3::Vec3(float x = 0, float y = 0, float z = 0) : x(x), y(y), z(z) {}
+Vec3::Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vec3& Vec3::operator+=(const Vec3& v) {
     x += v.x;
@@ -76,4 +76,8 @@ float Vec3::length2() const {
 
 Vec3 Vec3::normalize() {
     return (*this) /= length();
+}
+
+bool Vec3::isValid() {
+    return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
 }

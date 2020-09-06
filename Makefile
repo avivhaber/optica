@@ -23,7 +23,7 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OUT_DIR)/%.png: $(BUILD_DIR)/$(TARGET_EXEC)
-	$(BUILD_DIR)/$(TARGET_EXEC)
+	./$(TARGET_EXEC)
 	convert $(basename $@).ppm $@
 
 print-%  : ; @echo $* = $($*)
