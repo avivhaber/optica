@@ -1,21 +1,30 @@
 #include "Frame.h"
-#include "Color.h"
+#include "Vec3.h"
 #include "ImageUtil.h"
-#include "Sphere.h"
-
+#include "Line.h"
+#include "Camera.h"
 
 #include <iostream>
 
-int main() {
-    Frame f(2, 2);
-    Sphere s(Point(1,1,1), 23);
-    Color**& b = f.buffer;
-    b[0][0] = Color(255, 255, 255);
-    b[1][0] = Color(255, 0, 0);
-    b[0][1] = Color(255, 0, 255);
-    b[1][1] = Color(255, 255, 0);
+Color getColor(Line ray) {
+    float t = (ray.direction.y + 1.0f) / 2.0f;
+    Color bottom = Color(1, 1, 1);
+    Color top = Color(0.5, 0.7, 1);
+    return bottom+((top-bottom)*t);
+}
 
-    writeImage("render.ppm", f);
-    std::cout << s.radius << "\n";
+int main() {
+    int x = 400, y = 225;
+    Frame f(x, y);
+    Camera cam(x, y);
+    for (int i = 0; i < y; i++) {
+        for (int j = 0; j < x; j++) {
+            Line ray = cam.generateCameraRay(j, i);
+            //std::cout << ray.direction.toString() << std::endl;
+            f.buffer[j][i] = getColor(ray);
+        }
+    }
+
+    ImageUtil::writeImage("render.ppm", f);
     return 0;
 }

@@ -9,5 +9,5 @@ namespace constants {
 }
 
 namespace GeometryUtil {
-    Point LineSphereIntersection(Line line, Sphere sphere);
+    Point lineSphereIntersection(Line line, Sphere sphere);
 }

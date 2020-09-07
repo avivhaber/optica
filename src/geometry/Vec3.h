@@ -1,8 +1,9 @@
 #pragma once
+#include <string>
 
 /*
-A class for representing geometric vectors in 3-dimensions.
-A Vec3 is considered invalid if any of its components are Nan.
+A class for representing geometric vectors in 3 dimensions.
+A Vec3 is considered invalid if any of its components are NaN.
 This can be checked with isValdid().
 */
 class Vec3 {
@@ -32,7 +33,9 @@ class Vec3 {
         float length2() const;
         Vec3 normalize();
         bool isValid();
+        std::string toString();
 };
 
 // Type aliases
 using Point = Vec3;
+using Color = Vec3;

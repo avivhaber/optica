@@ -12,7 +12,7 @@
  * If there's 2 solutions, and both t's are positive, the smaller one is returned.
  * If not both positive, the greater t is returned.
 */
-Point GeometryUtil::LineSphereIntersection(Line line, Sphere sphere) {
+Point GeometryUtil::lineSphereIntersection(Line line, Sphere sphere) {
     float fnan = std::numeric_limits<float>::quiet_NaN();
 
     Vec3 u = line.origin - sphere.center;

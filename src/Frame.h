@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Color.h"
+#include "Vec3.h"
 
 class Frame {
     public:

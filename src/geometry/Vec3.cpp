@@ -1,4 +1,5 @@
 #include "Vec3.h"
+#include "string"
 #include <cmath>
 
 Vec3::Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
@@ -80,4 +81,8 @@ Vec3 Vec3::normalize() {
 
 bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
+}
+
+std::string Vec3::toString() {
+    return "x: " + std::to_string(x) + ", y: " + std::to_string(y) + ", z: " + std::to_string(z);
 }
