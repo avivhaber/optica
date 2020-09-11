@@ -12,7 +12,7 @@ void ImageUtil::writeImage(std::string fileName, const Frame& frame) {
 
     for (int y = 0; y < frame.height; y++) {
         for (int x = 0; x < frame.width; x++) {
-            Color col = frame.buffer[x][y];
+            Color col = frame.buffer[x][frame.height-y-1]; // Image is rendered bottom to top, write in reverse order
             int r = to8Bit(col.x), g = to8Bit(col.y), b = to8Bit(col.z);
             ofs << (char) r << (char) g << (char) b;
         }

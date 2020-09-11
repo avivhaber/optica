@@ -5,6 +5,7 @@
 #include <cmath>
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 /**
  * Finds the point where the line and sphere intersect.
@@ -16,8 +17,9 @@ Point GeometryUtil::lineSphereIntersection(Line line, Sphere sphere) {
     float fnan = std::numeric_limits<float>::quiet_NaN();
 
     Vec3 u = line.origin - sphere.center;
-    Vec3& d = line.direction;
-    float& r = sphere.radius;
+    Vec3 d = line.direction;
+    d.normalize();
+    const float& r = sphere.radius;
 
     float udotd = Vec3::dot(u, d);
     float discriminant = udotd*udotd - u.length2() + r*r;

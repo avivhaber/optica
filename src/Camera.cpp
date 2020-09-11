@@ -2,6 +2,7 @@
 #include "Vec3.h"
 #include "Line.h"
 #include <cmath>
+#include <iostream>
 
 Camera::Camera(
     int imageWidth,
@@ -28,7 +29,7 @@ Line Camera::generateCameraRay(int xIndex, int yIndex) {
 }
 
 void Camera::updateCameraVariables() {
-    float invAspectRatio = imageHeight / imageWidth;
+    float invAspectRatio = (float)(imageHeight-1) / (float)(imageWidth-1);
     imagePlaneWidth = 2 * focalLength * tan(horizontalFov / 2.0f);
     imagePlaneHeight = imagePlaneWidth * invAspectRatio;
     pixelSize = imagePlaneWidth / (imageWidth - 1);

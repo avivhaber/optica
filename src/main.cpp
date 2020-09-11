@@ -3,11 +3,15 @@
 #include "ImageUtil.h"
 #include "Line.h"
 #include "Camera.h"
+#include "GeometryUtil.h"
+#include <cmath>
 
 #include <iostream>
 
-Color getColor(Line ray) {
-    float t = (ray.direction.y + 1.0f) / 2.0f;
+Color getBackgroundColor(Line ray) {
+    Vec3 dir = ray.direction;
+    dir.normalize();
+    float t = (dir.y + 1.0f) / 2.0f;
     Color bottom = Color(1, 1, 1);
     Color top = Color(0.5, 0.7, 1);
     return bottom+((top-bottom)*t);
@@ -17,14 +21,21 @@ int main() {
     int x = 400, y = 225;
     Frame f(x, y);
     Camera cam(x, y);
+    Sphere s(Point(0, 0, 2), 0.5, Color(0, 80, 110)/255);
     for (int i = 0; i < y; i++) {
         for (int j = 0; j < x; j++) {
             Line ray = cam.generateCameraRay(j, i);
-            //std::cout << ray.direction.toString() << std::endl;
-            f.buffer[j][i] = getColor(ray);
+
+            Point poi = GeometryUtil::lineSphereIntersection(ray, s);
+            //std::cout << "Intersection : " << poi.toString() << std::endl;
+            if (poi.isValid()) {
+                f.buffer[j][i] = s.color;              
+            }
+            else {
+                f.buffer[j][i] = getBackgroundColor(ray);
+            }
         }
     }
-
     ImageUtil::writeImage("render.ppm", f);
     return 0;
 }

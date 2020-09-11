@@ -36,6 +36,6 @@ class Vec3 {
         std::string toString();
 };
 
-// Type aliases
-using Point = Vec3;
-using Color = Vec3;
+
+using Point = Vec3; // A point in 3D
+using Color = Vec3; // An RGB color. Ensure that each channel is between 0 and 1.
