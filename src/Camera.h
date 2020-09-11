@@ -1,7 +1,7 @@
 #pragma once
 #include "Vec3.h"
 #include "Line.h"
-#include "GeometryUtil.h"
+#include "Constants.h"
 
 class Camera {
     public:
@@ -10,7 +10,7 @@ class Camera {
         Camera(
             int imageWidth = 100,
             int imageHeight = 100,
-            float horizontalFov = constants::PI_OVER_2,
+            float horizontalFov = Constants::PI_OVER_2,
             float focalLength = 1);
 
 

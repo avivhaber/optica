@@ -3,7 +3,7 @@
 #include "ImageUtil.h"
 #include "Line.h"
 #include "Camera.h"
-#include "GeometryUtil.h"
+#include "Sphere.h"
 #include <cmath>
 
 #include <iostream>
@@ -26,9 +26,9 @@ int main() {
         for (int j = 0; j < x; j++) {
             Line ray = cam.generateCameraRay(j, i);
 
-            Point poi = GeometryUtil::lineSphereIntersection(ray, s);
+            Intersection poi = s.rayIntersection(ray);
             //std::cout << "Intersection : " << poi.toString() << std::endl;
-            if (poi.isValid()) {
+            if (poi.hit) {
                 f.buffer[j][i] = s.color;              
             }
             else {

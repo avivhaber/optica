@@ -1,19 +1,13 @@
 #pragma once
 #include "Vec3.h"
+#include "Object.h"
 
-class Sphere {
+class Sphere : public Object {
     public:
         Point center;
         float radius;
-        Color color;
 
-        Sphere(
-            Point center = Point(0 , 0, 0),
-            float radius = 1,
-            Color color = Color(1, 1, 1)
-        ) : center(center), radius(radius), color(color) {}
-
-        Vec3 normalAt(const Point& point) {
-            return (point - center).normalize();
-        }
+        Sphere(Point center = Point(), float radius = 1, Color color = Color(1, 1, 1));
+        Vec3 normalAt(const Point& point);
+        Intersection rayIntersection(const Line& ray);
 };
