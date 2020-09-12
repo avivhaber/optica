@@ -12,6 +12,7 @@ Scene::Scene(Camera cam) : camera(cam) {}
 
 // Renders the scene and saves the image to disk.
 void Scene::render() {
+    std::cout << "\r Rendering frame " << currentFrame << "..." << std::flush;
     Frame f(camera.getImageWidth(), camera.getImageHeight());
 
     for (int y = 0; y < f.height; y++) {
@@ -20,7 +21,8 @@ void Scene::render() {
             f.buffer[x][y] = getRayColor(ray);
         }
     }
-    ImageUtil::writeImage("render.ppm", f);
+    ImageUtil::writeImage(f, "render", currentFrame);
+    currentFrame++;
 }
 
 Color Scene::getRayColor(const Line& ray) {

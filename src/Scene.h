@@ -33,6 +33,7 @@ class Scene {
         void render();
     private:
         std::unordered_map<std::string, std::shared_ptr<Object>> objects;
+        int currentFrame = 1;
 
         Color getRayColor(const Line& ray);
         static Color getBackgroundColor(const Line& ray);

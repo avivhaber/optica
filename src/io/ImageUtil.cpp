@@ -5,9 +5,11 @@
 #include <fstream>
 
 const std::string ImageUtil::outputFolder = "out/";
+const std::string ImageUtil::ppmExtension = ".ppm";
+const int ImageUtil::numDigits = 4;
 
-void ImageUtil::writeImage(std::string fileName, const Frame& frame) {
-    std::ofstream ofs(outputFolder + fileName, std::ios_base::out | std::ios_base::binary);
+void ImageUtil::writeImage(const Frame& frame, std::string fileNameBase, int frameNum) {
+    std::ofstream ofs(outputFolder + fileNameBase + formatInt(frameNum) + ppmExtension, std::ios_base::out | std::ios_base::binary);
     ofs << "P6" << std::endl << frame.width << ' ' << frame.height << std::endl << "255" << std::endl;
 
     for (int y = 0; y < frame.height; y++) {
@@ -22,4 +24,15 @@ void ImageUtil::writeImage(std::string fileName, const Frame& frame) {
 
 int ImageUtil::to8Bit(float f) {
     return static_cast<int>(255.999 * f);
+}
+
+std::string ImageUtil::formatInt(int n) {
+    std::string out;
+    std::string s = std::to_string(n);
+    int leading = numDigits - s.length();
+    for (int i = 0; i < leading; i++) {
+        out += "0";
+    }
+    out += s;
+    return out;
 }
