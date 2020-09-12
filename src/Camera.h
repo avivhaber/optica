@@ -8,13 +8,21 @@ class Camera {
         Point position;
 
         Camera(
-            int imageWidth = 100,
-            int imageHeight = 100,
+            int imageWidth,
+            int imageHeight,
             float horizontalFov = Constants::PI_OVER_2,
             float focalLength = 1);
 
 
         Line generateCameraRay(int xIndex, int yIndex);
+
+        float getFocalLength();
+        void setFocalLength(float foc);
+        float getHorizontalFov();
+        void setHorizontalFov(float fov);
+        int getImageWidth();
+        int getImageHeight();
+        void setImageSize(int width, int height);
     
     private:
         int imageWidth; // Image resolution width
@@ -27,11 +35,4 @@ class Camera {
         Point bottomLeftPixel; // World space location of center bottom left pixel.
 
         void updateCameraVariables();
-        float getFocalLength();
-        void setFocalLength(float foc);
-        float getHorizontalFov();
-        void setHorizontalFov(float fov);
-        int getImageWidth();
-        int getImageHeight();
-        void setImageSize(int width, int height);
 };

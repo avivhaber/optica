@@ -6,8 +6,8 @@
 #include <algorithm>
 #include <iostream>
 
-Vec3 Sphere::normalAt(const Point& point) {
-    return (point - center).normalize();
+Vec3 Sphere::normalAt(const Point& point) const {
+    return (point - center)/radius;
 }
 
 Sphere::Sphere(Point center, float radius, Color color) : Object(color), center(center), radius(radius) {}
@@ -18,7 +18,7 @@ Sphere::Sphere(Point center, float radius, Color color) : Object(color), center(
  * If there's 2 solutions, and both t's are positive, the smaller one is returned.
  * If not both positive, the greater t is returned.
 */
-Intersection Sphere::rayIntersection(const Line& ray) {
+Intersection Sphere::rayIntersection(const Line& ray) const {
     Vec3 u = ray.origin - center;
     Vec3 d = ray.direction;
     d.normalize();
@@ -42,5 +42,12 @@ Intersection Sphere::rayIntersection(const Line& ray) {
     else {
         t = (std::max(t1, t2)); // in case one of the POIs is at line.origin
     }
-    return Intersection(true, t, ray.at(t));
+    Point poi = ray.at(t);
+    return Intersection(true, t, poi, Vec3::distance2(ray.origin, poi));
+}
+
+void Sphere::translate(float x, float y, float z) {
+    center.x += x;
+    center.y += y;
+    center.z += z;
 }

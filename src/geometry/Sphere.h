@@ -8,6 +8,8 @@ class Sphere : public Object {
         float radius;
 
         Sphere(Point center = Point(), float radius = 1, Color color = Color(1, 1, 1));
-        Vec3 normalAt(const Point& point);
-        Intersection rayIntersection(const Line& ray);
+        Vec3 normalAt(const Point& point) const;
+        Intersection rayIntersection(const Line& ray) const;
+
+        void translate(float x, float y, float z);
 };
