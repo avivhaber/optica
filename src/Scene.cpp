@@ -5,6 +5,9 @@
 #include "Vec3.h"
 #include <iostream>
 #include <limits>
+#include <algorithm>
+
+Point light(2, 2, 0);
 
 Scene::Scene(int imageWidth, int imageHeight) : camera(Camera(imageWidth, imageHeight)) {}
 Scene::Scene(int imageWidth, int imageHeight, float fov, float foc) : camera(Camera(imageWidth, imageHeight, fov, foc)) {}
@@ -36,7 +39,9 @@ Color Scene::getRayColor(const Line& ray) {
         }
     }
     if (hitObj != nullptr) {
-        return hitObj->color;
+        Vec3 lightVec = (light-closestPoi.poi).normalize();
+        float factor = Vec3::dot(lightVec, hitObj->normalAt(closestPoi.poi));
+        return hitObj->color * std::min(std::max(0.0f, factor+0.0f), 1.0f);
     }
     return getBackgroundColor(ray);
 }

@@ -9,7 +9,7 @@ class Sphere : public Object {
 
         Sphere(Point center = Point(), float radius = 1, Color color = Color(1, 1, 1));
         Vec3 normalAt(const Point& point) const;
-        Intersection rayIntersection(const Line& ray) const;
+        Intersection rayIntersection(const Line& ray, float tmin = 0, float tmax = Constants::FLOAT_INF) const;
 
         void translate(float x, float y, float z);
 };

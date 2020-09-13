@@ -2,6 +2,7 @@
 #include "Vec3.h"
 #include "Line.h"
 #include "Object.h"
+#include "MathUtil.h"
 #include <cmath>
 #include <algorithm>
 #include <iostream>
@@ -18,7 +19,7 @@ Sphere::Sphere(Point center, float radius, Color color) : Object(color), center(
  * If there's 2 solutions, and both t's are positive, the smaller one is returned.
  * If not both positive, the greater t is returned.
 */
-Intersection Sphere::rayIntersection(const Line& ray) const {
+Intersection Sphere::rayIntersection(const Line& ray, float tmin, float tmax) const {
     Vec3 u = ray.origin - center;
     Vec3 d = ray.direction;
     d.normalize();
@@ -36,11 +37,14 @@ Intersection Sphere::rayIntersection(const Line& ray) const {
     float t2 = -udotd - sqrtDisc;
 
     float t = 0;
-    if (t1 > 0 && t2 > 0) {
-        t = std::min(t1, t2);
+    if (MathUtil::inRangeExclusive(t2, tmin, tmax)) {
+        t = t2;
+    }
+    else if (MathUtil::inRangeExclusive(t1, tmin, tmax)) {
+        t = t1;
     }
     else {
-        t = (std::max(t1, t2)); // in case one of the POIs is at line.origin
+        return Intersection(false);
     }
     Point poi = ray.at(t);
     return Intersection(true, t, poi, Vec3::distance2(ray.origin, poi));

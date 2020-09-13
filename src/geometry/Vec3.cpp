@@ -83,6 +83,6 @@ bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
 }
 
-std::string Vec3::toString() {
+std::string Vec3::toString() const {
     return "x: " + std::to_string(x) + ", y: " + std::to_string(y) + ", z: " + std::to_string(z);
 }

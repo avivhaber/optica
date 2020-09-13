@@ -33,7 +33,7 @@ class Vec3 {
         float length2() const;
         Vec3 normalize();
         bool isValid();
-        std::string toString();
+        std::string toString() const;
 };
 
 
