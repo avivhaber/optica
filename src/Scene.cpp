@@ -55,6 +55,16 @@ Color Scene::getBackgroundColor(const Line& ray) {
     return bottom+((top-bottom)*t);
 }
 
+void Scene::renderAnimation(float& property, float endVal, int frameDuration) {
+    float delta = (endVal-property) / (float)frameDuration;
+
+    render();
+    for (int i = 0; i < frameDuration; i++) {
+        property += delta;
+        render();
+    }
+}
+
 // Adds an object to scene. Unlike the [] operator, add
 // checks to see if the identifier exists to avoid overwriting.
 void Scene::add(const std::string& identifier, std::shared_ptr<Object> obj) {

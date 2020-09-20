@@ -31,6 +31,7 @@ class Scene {
         void remove(const std::string& identifier);
         std::shared_ptr<Object> operator[](const std::string& identifier);
         void render();
+        void renderAnimation(float& property, float endVal, int frameDuration);
     private:
         std::unordered_map<std::string, std::shared_ptr<Object>> objects;
         int currentFrame = 1;
