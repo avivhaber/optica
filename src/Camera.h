@@ -15,6 +15,7 @@ class Camera {
 
 
         Line generateCameraRay(int xIndex, int yIndex);
+        Line generateCameraRay(float xIndex, float yIndex);
 
         float getFocalLength();
         void setFocalLength(float foc);
@@ -29,8 +30,8 @@ class Camera {
         int imageHeight; // Image resolution height
         float focalLength; // Distance from camera to image plane.
         float horizontalFov;
-        float imagePlaneWidth;
-        float imagePlaneHeight;
+        float viewportWidth;
+        float viewportHeight;
         float pixelSize; // Side length of a pixel on the image plane
         Point bottomLeftPixel; // World space location of center bottom left pixel.
 

@@ -1,7 +1,10 @@
 #include "Scene.h"
 #include "Object.h"
 #include "Frame.h"
+#include "Sphere.h"
 #include "ImageUtil.h"
+#include "MathUtil.h"
+#include "ColorSet.h"
 #include "Vec3.h"
 #include <iostream>
 #include <limits>
@@ -15,13 +18,19 @@ Scene::Scene(Camera cam) : camera(cam) {}
 
 // Renders the scene and saves the image to disk.
 void Scene::render() {
-    std::cout << "\r Rendering frame " << currentFrame << "..." << std::flush;
+    std::cout << "\rRendering frame " << currentFrame << "..." << std::flush;
     Frame f(camera.getImageWidth(), camera.getImageHeight());
 
     for (int y = 0; y < f.height; y++) {
         for (int x = 0; x < f.width; x++) {
-            Line ray = camera.generateCameraRay(x, y);
-            f.buffer[x][y] = getRayColor(ray);
+            ColorSet c;
+            for (int i = 0; i < renderer.spp; i++) {
+                float xoff = MathUtil::rand() - 0.5f;
+                float yoff = MathUtil::rand() - 0.5f;
+                Line ray = camera.generateCameraRay(x+xoff, y+yoff);
+                c.add(getRayColor(ray));
+            }
+            f.buffer[x][y] = c.average();
         }
     }
     ImageUtil::writeImage(f, "render", currentFrame);
@@ -33,22 +42,22 @@ Color Scene::getRayColor(const Line& ray) {
     Object* hitObj = nullptr;   
     for (auto& e : objects) {
         Intersection tempPoi = e.second->rayIntersection(ray);    
-        if (tempPoi.hit && tempPoi.dist2 < closestPoi.dist2) {
+        if (tempPoi.hit && tempPoi.t < closestPoi.t) {
             closestPoi = tempPoi;
             hitObj = e.second.get();
         }
     }
     if (hitObj != nullptr) {
         Vec3 lightVec = (light-closestPoi.poi).normalize();
-        float factor = Vec3::dot(lightVec, hitObj->normalAt(closestPoi.poi));
-        return hitObj->color * std::min(std::max(0.0f, factor+0.0f), 1.0f);
+        Vec3 N = hitObj->normalAt(closestPoi.poi);
+        float factor = Vec3::dot(lightVec, N);
+        return hitObj->colorAt(closestPoi.poi) * (factor);
     }
     return getBackgroundColor(ray);
 }
 
 Color Scene::getBackgroundColor(const Line& ray) {
-    Vec3 dir = ray.direction;
-    dir.normalize();
+    Vec3 dir = ray.direction.normalize();
     float t = (dir.y + 1.0f) / 2.0f;
     Color bottom = Color(1, 1, 1);
     Color top = Color(0.5, 0.7, 1);

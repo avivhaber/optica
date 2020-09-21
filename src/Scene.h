@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Object.h"
 #include "Vec3.h"
+#include "RenderOptions.h"
 #include <iostream>
 #include <unordered_map>
 #include <memory>
@@ -22,6 +23,7 @@ struct GeneralException : std::exception {
 class Scene {
     public:
         Camera camera;
+        RenderOptions renderer;
 
         Scene(int imageWidth, int imageHeight);
         Scene(int imageWidth, int imageHeight, float fov, float foc);

@@ -75,8 +75,8 @@ float Vec3::length2() const {
     return dot(*this, *this);
 }
 
-Vec3 Vec3::normalize() {
-    return (*this) /= length();
+Vec3 Vec3::normalize() const {
+    return (*this) / length();
 }
 
 bool Vec3::isValid() {

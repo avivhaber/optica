@@ -1,6 +1,7 @@
 #include "Frame.h"
 #include "Vec3.h"
 #include "ImageUtil.h"
+#include "MathUtil.h"
 
 #include <fstream>
 
@@ -23,7 +24,7 @@ void ImageUtil::writeImage(const Frame& frame, std::string fileNameBase, int fra
 }
 
 int ImageUtil::to8Bit(float f) {
-    return static_cast<int>(255.999 * f);
+    return static_cast<int>(255.999 * MathUtil::clip(f, 0.0f, 1.0f));
 }
 
 std::string ImageUtil::formatInt(int n) {

@@ -31,7 +31,7 @@ class Vec3 {
         static float distance2(const Vec3& u, const Vec3& v);
         float length() const;
         float length2() const;
-        Vec3 normalize();
+        Vec3 normalize() const;
         bool isValid();
         std::string toString() const;
 };

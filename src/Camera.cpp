@@ -28,15 +28,22 @@ Line Camera::generateCameraRay(int xIndex, int yIndex) {
     return Line(position, pixel-position);
 }
 
+// Same as overloaded, but used for pertrubing the location within the pixel
+Line Camera::generateCameraRay(float xIndex, float yIndex) {
+    Point pixel = bottomLeftPixel;
+    pixel += Vec3(pixelSize * xIndex, pixelSize * yIndex, 0);
+    return Line(position, pixel-position);
+}
+
 void Camera::updateCameraVariables() {
     float invAspectRatio = (float)(imageHeight-1) / (float)(imageWidth-1);
-    imagePlaneWidth = 2 * focalLength * tan(horizontalFov / 2.0f);
-    imagePlaneHeight = imagePlaneWidth * invAspectRatio;
-    pixelSize = imagePlaneWidth / (imageWidth - 1);
+    viewportWidth = 2 * focalLength * tan(horizontalFov / 2.0f);
+    viewportHeight = viewportWidth * invAspectRatio;
+    pixelSize = viewportWidth / (imageWidth - 1);
     bottomLeftPixel = position;
     bottomLeftPixel.z += focalLength;
-    bottomLeftPixel.y -= imagePlaneHeight / 2.0f;
-    bottomLeftPixel.x -= imagePlaneWidth / 2.0f;
+    bottomLeftPixel.y -= viewportHeight / 2.0f;
+    bottomLeftPixel.x -= viewportWidth / 2.0f;
 }
 
 float Camera::getFocalLength() {return focalLength;}

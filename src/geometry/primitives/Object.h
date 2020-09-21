@@ -2,6 +2,7 @@
 #include "Line.h"
 #include "Vec3.h"
 #include "MathUtil.h"
+#include "Interval.h"
 #include <limits>
 
 // Represents the outcome of an intersection test.
@@ -9,19 +10,16 @@ struct Intersection {
     bool hit; // Whether an intersection occured
     float t; // The value of parameter t that corresponds to intersection
     Point poi; // The point of intersection
-    float dist2; // Squared distance from poi to the origin of the intersecting ray.
 
-    Intersection(bool hit = false, float t = 0, Point poi = Point(), float dist2 = Constants::FLOAT_INF)
-    : hit(hit), t(t), poi(poi), dist2(dist2) {}
+    Intersection(bool hit = false, float t = Constants::FLOAT_INF, Point poi = Point())
+    : hit(hit), t(t), poi(poi) {}
 };
 
 // Represents a renderable object in the scene.
 // Object is an abstract class that acts as a base for different geometries.
 class Object {
     public:
-        Color color;
-        Object(Color color = Color(1, 1, 1)) : color(color) {}
-
         virtual Vec3 normalAt(const Point& point) const = 0;
-        virtual Intersection rayIntersection(const Line& ray, float tmin = 0, float tmax = Constants::FLOAT_INF) const = 0;
+        virtual Color colorAt(const Point& point) const {return Color(1, 1, 1);}
+        virtual Intersection rayIntersection(const Line& ray, Interval tRange = Interval()) const = 0;
 };
