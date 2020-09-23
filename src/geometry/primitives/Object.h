@@ -5,8 +5,20 @@
 #include "Interval.h"
 #include <limits>
 
-class Object;
+struct GeneralException;
 struct Intersection;
+class Object;
+
+struct GeneralException : std::exception {
+    char const* msg;
+    GeneralException(char const* msg) : msg(msg) {}
+    ~GeneralException() {
+        delete[] msg;
+    }
+    char const* what() const throw() {
+        return msg;
+    }
+};
 
 // Represents the outcome of an intersection test.
 struct Intersection {

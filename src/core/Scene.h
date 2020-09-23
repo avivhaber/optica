@@ -2,28 +2,17 @@
 #include "Camera.h"
 #include "Object.h"
 #include "Vec3.h"
-#include "RenderOptions.h"
+#include "Renderer.h"
 #include <iostream>
 #include <unordered_map>
 #include <memory>
 
 using std::make_shared;
 
-struct GeneralException : std::exception {
-    char const* msg;
-    GeneralException(char const* msg) : msg(msg) {}
-    ~GeneralException() {
-        delete[] msg;
-    }
-    char const* what() const throw() {
-        return msg;
-    }
-};
-
 class Scene {
     public:
         Camera camera;
-        RenderOptions renderer;
+        Renderer renderer;
 
         Scene(int imageWidth, int imageHeight);
         Scene(int imageWidth, int imageHeight, float fov, float foc);
