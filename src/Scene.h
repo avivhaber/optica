@@ -38,6 +38,7 @@ class Scene {
         std::unordered_map<std::string, std::shared_ptr<Object>> objects;
         int currentFrame = 1;
 
+        Intersection getClosest(const Line& ray);
         Color getRayColor(const Line& ray);
         static Color getBackgroundColor(const Line& ray);
 };

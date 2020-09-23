@@ -51,7 +51,7 @@ Intersection Sphere::rayIntersection(const Line& ray, Interval tRange) const {
         return Intersection(false);
     }
     Point poi = ray.at(t);
-    return Intersection(true, t, poi);
+    return Intersection(true, this, t, poi);
 }
 
 void Sphere::translate(float x, float y, float z) {

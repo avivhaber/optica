@@ -37,23 +37,30 @@ void Scene::render() {
     currentFrame++;
 }
 
+// Core function of ray tracer. Recursively gets the color of a given ray.
 Color Scene::getRayColor(const Line& ray) {
-    Intersection closestPoi;
-    Object* hitObj = nullptr;   
-    for (auto& e : objects) {
-        Intersection tempPoi = e.second->rayIntersection(ray);    
-        if (tempPoi.hit && tempPoi.t < closestPoi.t) {
-            closestPoi = tempPoi;
-            hitObj = e.second.get();
-        }
-    }
-    if (hitObj != nullptr) {
-        Vec3 lightVec = (light-closestPoi.poi).normalize();
-        Vec3 N = hitObj->normalAt(closestPoi.poi);
+    Intersection closest = getClosest(ray);
+    if (closest.hit) {
+        Vec3 lightVec = (light-closest.point).normalize();
+        Vec3 N = closest.obj->normalAt(closest.point);
         float factor = Vec3::dot(lightVec, N);
-        return hitObj->colorAt(closestPoi.poi) * (factor);
+        return closest.obj->colorAt(closest.point) * factor;
     }
     return getBackgroundColor(ray);
+}
+
+// Returns the closest object that intersects with ray.
+// The "hit" field of the returned object is false iff
+// there are no intersections.
+Intersection Scene::getClosest(const Line& ray) {
+    Intersection closest(false);
+    for (auto& e : objects) {
+        Intersection curr = e.second->rayIntersection(ray);
+        if (curr.hit && curr.t < closest.t) {
+            closest = curr;
+        }
+    }
+    return closest;
 }
 
 Color Scene::getBackgroundColor(const Line& ray) {

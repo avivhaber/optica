@@ -7,12 +7,17 @@ Vec3 Plane::normalAt(const Point& point) const {
     return normal;
 }
 
+// Generate checkerboard pattern
 Color Plane::colorAt(const Point& point) const {
     static Color c1 = Color(1, 1, 0);
     static Color c2 = Color(1, 0, 0);
     float size = 0.2f;
     bool cx = abs(fmod(point.x, 2.0f*size)) < (size);
+    cx = point.x < 0 ? !cx : cx;
+
     bool cz = abs(fmod(point.z, 2.0f*size)) < (size);
+    cz = point.z < 0 ? !cz : cz;
+
     if (cx != cz) return c1;
     return c2;
 }
@@ -32,9 +37,5 @@ Intersection Plane::rayIntersection(const Line& ray, Interval tRange) const {
     float t = (D - Vec3::dot(normal, ray.origin)) / ndotd;
     
     if (!tRange.inRangeExclusive(t)) return Intersection(false);
-    return Intersection(true, t, ray.at(t));
-//    if (ray.direction.y == 0.0f) return Intersection(false);
-//    float t = (D - ray.origin.y) / ray.direction.y;
-//    if (!tRange.inRangeExclusive(t)) return Intersection(false);
-//    return Intersection(true, t, ray.at(t));
+    return Intersection(true, this, t, ray.at(t));
 }

@@ -5,14 +5,18 @@
 #include "Interval.h"
 #include <limits>
 
+class Object;
+struct Intersection;
+
 // Represents the outcome of an intersection test.
 struct Intersection {
     bool hit; // Whether an intersection occured
+    const Object* obj; // The object that was hit. Ensure that obj does not get deleted before this Intersection object.
     float t; // The value of parameter t that corresponds to intersection
-    Point poi; // The point of intersection
+    Point point; // The point of intersection
 
-    Intersection(bool hit = false, float t = Constants::FLOAT_INF, Point poi = Point())
-    : hit(hit), t(t), poi(poi) {}
+    Intersection(bool hit = false, const Object* obj = nullptr, float t = Constants::FLOAT_INF, Point point = Point())
+    : hit(hit), obj(obj), t(t), point(point) {}
 };
 
 // Represents a renderable object in the scene.
