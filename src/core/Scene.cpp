@@ -28,9 +28,9 @@ void Scene::render() {
                 float xoff = MathUtil::rand() - 0.5f;
                 float yoff = MathUtil::rand() - 0.5f;
                 Line ray = camera.generateCameraRay(x+xoff, y+yoff);
-                c.add(getRayColor(ray));
+                c.add(getRayColor(ray, 1));
             }
-            f.buffer[x][y] = c.average();
+            f.buffer[x][y] = renderer.gammaCorrect(c.average());
         }
     }
     ImageUtil::writeImage(f, "render", currentFrame);
@@ -38,13 +38,17 @@ void Scene::render() {
 }
 
 // Core function of ray tracer. Recursively gets the color of a given ray.
-Color Scene::getRayColor(const Line& ray) {
+Color Scene::getRayColor(const Line& ray, int depth) {
+    if (depth >= renderer.maxDepth) return Color(0, 0, 0);
+
     Intersection closest = getClosest(ray);
     if (closest.hit) {
-        Vec3 lightVec = (light-closest.point).normalize();
         Vec3 N = closest.obj->normalAt(closest.point);
-        float factor = Vec3::dot(lightVec, N);
-        return closest.obj->colorAt(closest.point) * factor;
+        //std::cout<<"coolVar "<<renderer.sampler.x<<"\n";
+        Line nextRay = renderer.sampler.sampleNextRay(closest.point, N);
+        //float cosTheta = Vec3::dot(nextRay.direction.normalize(), N);
+        //return closest.obj->colorAt(closest.point) * cosTheta;
+        return getRayColor(nextRay, depth+1) * renderer.albedo;
     }
     return getBackgroundColor(ray);
 }

@@ -1,5 +1,6 @@
 #include "Vec3.h"
-#include "string"
+#include "MathUtil.h"
+#include <string>
 #include <cmath>
 
 Vec3::Vec3(float x, float y, float z) : x(x), y(y), z(z) {}
@@ -81,6 +82,10 @@ Vec3 Vec3::normalize() const {
 
 bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
+}
+
+Vec3 Vec3::randVec(float min, float max) {
+    return Vec3(MathUtil::rand(min,max), MathUtil::rand(min,max), MathUtil::rand(min,max));
 }
 
 std::string Vec3::toString() const {

@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-    int x = 1280, y = 720;
+    int x = 640, y = 360;
     Scene scene(x, y);
     scene.renderer.spp = 100;
 
@@ -14,7 +14,7 @@ int main() {
     auto red = make_shared<Sphere>(Sphere(Point(1, 0, 3), 0.5, Color(255, 80, 110)/255));
     auto green = make_shared<Sphere>(Sphere(Point(-0.5, 0.5, 1.3), 0.5, Color(87, 255, 13)/255));
 
-    auto floor = make_shared<Plane>(Plane(Vec3(0, 1, 0), -1));
+    auto floor = make_shared<Sphere>(Sphere(Vec3(0, -100.5, 0), 100));
 
 
     scene.add("s1", blue);

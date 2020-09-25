@@ -33,6 +33,7 @@ class Vec3 {
         float length2() const;
         Vec3 normalize() const;
         bool isValid();
+        static Vec3 randVec(float min, float max);
         std::string toString() const;
 };
 

@@ -28,6 +28,6 @@ class Scene {
         int currentFrame = 1;
 
         Intersection getClosest(const Line& ray);
-        Color getRayColor(const Line& ray);
+        Color getRayColor(const Line& ray, int depth);
         static Color getBackgroundColor(const Line& ray);
 };
