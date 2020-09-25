@@ -11,7 +11,7 @@ class Renderer {
         float gamma; // Used for gamma correction. colorOut = colorIn ^ (1/gamma).
         const Sampler& sampler; // The function which generates a random hemispherical direction
 
-        Renderer(int spp = 10, int maxDepth = 20, float albedo = 0.5f, float gamma = 1.0f, const Sampler& sampler = SamplerDefaults::rejection)
+        Renderer(int spp = 10, int maxDepth = 20, float albedo = 0.5f, float gamma = 2.0f, const Sampler& sampler = SamplerDefaults::rejection)
         : spp(spp), maxDepth(maxDepth), albedo(albedo), gamma(gamma), sampler(sampler) {}
 
         Color gammaCorrect(const Color& in) const {

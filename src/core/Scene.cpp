@@ -18,7 +18,6 @@ Scene::Scene(Camera cam) : camera(cam) {}
 
 // Renders the scene and saves the image to disk.
 void Scene::render() {
-    std::cout << "\rRendering frame " << currentFrame << "..." << std::flush;
     Frame f(camera.getImageWidth(), camera.getImageHeight());
 
     for (int y = 0; y < f.height; y++) {
@@ -32,6 +31,7 @@ void Scene::render() {
             }
             f.buffer[x][y] = renderer.gammaCorrect(c.average());
         }
+        std::cout << "\rRendering frame " << currentFrame << "..." << " (" << (100*y*f.width)/(f.width*f.height) << "%)" << std::flush; // print status
     }
     ImageUtil::writeImage(f, "render", currentFrame);
     currentFrame++;
