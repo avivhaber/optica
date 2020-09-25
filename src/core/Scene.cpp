@@ -48,7 +48,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
         Line nextRay = renderer.sampler->sampleNextRay(closest.point, N);
         //float cosTheta = Vec3::dot(nextRay.direction.normalize(), N);
         //return closest.obj->colorAt(closest.point) * cosTheta;
-        return getRayColor(nextRay, depth+1) * renderer.albedo;
+        return Color(0.7,0.3,0.3) * getRayColor(nextRay, depth+1);
     }
     return getBackgroundColor(ray);
 }

@@ -20,6 +20,7 @@ class Vec3 {
         Vec3& operator/=(const float s);
         Vec3 operator+(const Vec3& v) const;
         Vec3 operator-(const Vec3& v) const;
+        Vec3 operator*(const Vec3& v) const;
         Vec3 operator*(const float s) const;
         Vec3 operator/(const float s) const;
         Vec3 operator-() const;

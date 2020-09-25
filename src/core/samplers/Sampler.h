@@ -2,6 +2,8 @@
 #include "Line.h"
 #include "Vec3.h"
 
+
+// Sampler for a diffuse material. Chooses which direction the reflected ray goes.
 class Sampler {
     public:
         virtual Line sampleNextRay(const Point& hit, const Vec3& normal) const = 0;
