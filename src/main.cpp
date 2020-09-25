@@ -6,9 +6,9 @@
 #include <iostream>
 
 int main() {
-    int x = 1280, y = 720;
+    int x = 1920, y = 1080;
     Scene scene(x, y);
-    scene.renderer.spp = 100;
+    scene.renderer.spp = 1000;
     scene.renderer.sampler = &Samplers::rejection;
 
     auto blue = make_shared<Sphere>(Sphere(Point(0, 0, 2), 0.5, Color(0, 80, 110)/255));

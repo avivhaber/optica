@@ -1,5 +1,5 @@
 build
-screenshots
+screenshots/*
+!screenshots/example.png
 out/*
-!out/example.png
 optica
