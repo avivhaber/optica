@@ -7,12 +7,15 @@ class Renderer {
     public:
         int spp; // Samples per pixel.
         int maxDepth;
-        float albedo;
-        float gamma; // Used for gamma correction. colorOut = colorIn ^ (1/gamma).
-        const Sampler& sampler; // The function which generates a random hemispherical direction
+        float albedo {0.5};
+        float gamma {2.0}; // Used for gamma correction. colorOut = colorIn ^ (1/gamma).
+        float tMin {0.0001};
+        const Sampler* sampler; // The function which generates a random hemispherical direction
 
-        Renderer(int spp = 10, int maxDepth = 20, float albedo = 0.5f, float gamma = 2.0f, const Sampler& sampler = SamplerDefaults::rejection)
-        : spp(spp), maxDepth(maxDepth), albedo(albedo), gamma(gamma), sampler(sampler) {}
+        Renderer(int spp = 10, int maxDepth = 20, const Sampler* sampler = &Samplers::rejection)
+        : spp(spp), maxDepth(maxDepth), sampler(sampler) {
+            this->sampler = sampler;
+        }
 
         Color gammaCorrect(const Color& in) const {
             if (gamma == 2.0f) {

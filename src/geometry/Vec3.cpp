@@ -84,8 +84,18 @@ bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
 }
 
+// Each component is unformly distributed over [-1,1)
 Vec3 Vec3::randVec(float min, float max) {
     return Vec3(MathUtil::rand(min,max), MathUtil::rand(min,max), MathUtil::rand(min,max));
+}
+
+// Returns a unofmrly distributed unit vector.
+// Uses method described here: https://math.stackexchange.com/a/1586015
+Vec3 Vec3::randomUnitVec() {
+    float theta = MathUtil::rand(0, 2*Constants::PI);
+    float z = MathUtil::rand(-1, 1);
+    float r = sqrt(1 - z*z);
+    return Vec3(r*cos(theta), r*sin(theta), z);
 }
 
 std::string Vec3::toString() const {

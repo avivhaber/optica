@@ -4,10 +4,10 @@
 #include <random>
 
 namespace Constants {
-    constexpr float PI {3.1415927};
-    constexpr float PI_OVER_2 {1.5707964};
-    constexpr float PI_OVER_180 {PI/180.0f};
-    constexpr float FLOAT_INF = std::numeric_limits<float>::infinity();
+    inline constexpr float PI {3.1415927};
+    inline constexpr float PI_OVER_2 {1.5707964};
+    inline constexpr float PI_OVER_180 {PI/180.0f};
+    inline constexpr float FLOAT_INF = std::numeric_limits<float>::infinity();
 }
 
 namespace MathUtil {

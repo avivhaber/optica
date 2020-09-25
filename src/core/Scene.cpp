@@ -31,7 +31,8 @@ void Scene::render() {
             }
             f.buffer[x][y] = renderer.gammaCorrect(c.average());
         }
-        std::cout << "\rRendering frame " << currentFrame << "..." << " (" << (100*y*f.width)/(f.width*f.height) << "%)" << std::flush; // print status
+        // Update render progress
+        std::cout << "\rRendering frame " << currentFrame << "..." << " (" << (100*y*f.width)/(f.width*f.height) << "%)" << std::flush;
     }
     ImageUtil::writeImage(f, "render", currentFrame);
     currentFrame++;
@@ -44,8 +45,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
     Intersection closest = getClosest(ray);
     if (closest.hit) {
         Vec3 N = closest.obj->normalAt(closest.point);
-        //std::cout<<"coolVar "<<renderer.sampler.x<<"\n";
-        Line nextRay = renderer.sampler.sampleNextRay(closest.point, N);
+        Line nextRay = renderer.sampler->sampleNextRay(closest.point, N);
         //float cosTheta = Vec3::dot(nextRay.direction.normalize(), N);
         //return closest.obj->colorAt(closest.point) * cosTheta;
         return getRayColor(nextRay, depth+1) * renderer.albedo;
@@ -59,7 +59,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
 Intersection Scene::getClosest(const Line& ray) {
     Intersection closest(false);
     for (auto& e : objects) {
-        Intersection curr = e.second->rayIntersection(ray);
+        Intersection curr = e.second->rayIntersection(ray, Interval(renderer.tMin));
         if (curr.hit && curr.t < closest.t) {
             closest = curr;
         }
