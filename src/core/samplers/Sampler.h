@@ -48,7 +48,7 @@ class NaiveSampler : public Sampler {
 };
 
 namespace Samplers {
-    inline constexpr RejectionSampler rejection = RejectionSampler();
-    inline constexpr LambertianSampler lambert = LambertianSampler();
-    inline constexpr NaiveSampler naive = NaiveSampler();
+    inline constexpr RejectionSampler rejection{};
+    inline constexpr LambertianSampler lambert{};
+    inline constexpr NaiveSampler naive{};
 }

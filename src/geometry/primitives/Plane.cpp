@@ -22,7 +22,7 @@ Color Plane::colorAt(const Point& point) const {
     return c2;
 }
 
-Plane::Plane(Vec3 normal, float D) {
+Plane::Plane(Vec3 normal, float D, Interval x, Interval y, Interval z) : xRange(x), yRange(y), zRange(z) {
     float len = normal.length();
     this->normal = normal / len;
     this->D = D / len;
@@ -37,5 +37,11 @@ Intersection Plane::rayIntersection(const Line& ray, Interval tRange) const {
     float t = (D - Vec3::dot(normal, ray.origin)) / ndotd;
     
     if (!tRange.inRangeExclusive(t)) return Intersection(false);
-    return Intersection(true, this, t, ray.at(t));
+
+    Vec3 p = ray.at(t);
+    if (!xRange.inRangeExclusive(p.x) || !yRange.inRangeExclusive(p.y) || !zRange.inRangeExclusive(p.z)) {
+        return Intersection(false);
+    }
+
+    return Intersection(true, this, t, p);
 }

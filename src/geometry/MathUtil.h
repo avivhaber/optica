@@ -4,8 +4,9 @@
 #include <random>
 
 namespace Constants {
-    inline constexpr float PI {3.1415927};
-    inline constexpr float PI_OVER_2 {1.5707964};
+    inline constexpr float PI {3.14159265359};
+    inline constexpr float PI_OVER_2 {PI/2};
+    inline constexpr float ONE_OVER_PI {1.0f/PI};
     inline constexpr float PI_OVER_180 {PI/180.0f};
     inline constexpr float FLOAT_INF = std::numeric_limits<float>::infinity();
 }

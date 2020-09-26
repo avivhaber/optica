@@ -14,8 +14,8 @@ class Camera {
             float focalLength = 1);
 
 
-        Line generateCameraRay(int xIndex, int yIndex);
-        Line generateCameraRay(float xIndex, float yIndex);
+        Line getCameraRay(float xIndex, float yIndex);
+        Line getCameraRayPertrubed(int xIndex, int yIndex);
 
         float getFocalLength();
         void setFocalLength(float foc);

@@ -24,9 +24,7 @@ void Scene::render() {
         for (int x = 0; x < f.width; x++) {
             ColorSet c;
             for (int i = 0; i < renderer.spp; i++) {
-                float xoff = MathUtil::rand() - 0.5f;
-                float yoff = MathUtil::rand() - 0.5f;
-                Line ray = camera.generateCameraRay(x+xoff, y+yoff);
+                Line ray = camera.getCameraRayPertrubed(x, y);
                 c.add(getRayColor(ray, 1));
             }
             f.buffer[x][y] = renderer.gammaCorrect(c.average());
@@ -48,7 +46,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
         Line nextRay = renderer.sampler->sampleNextRay(closest.point, N);
         //float cosTheta = Vec3::dot(nextRay.direction.normalize(), N);
         //return closest.obj->colorAt(closest.point) * cosTheta;
-        return Color(0.7,0.3,0.3) * getRayColor(nextRay, depth+1);
+        return closest.obj->colorAt(closest.point) * getRayColor(nextRay, depth+1) * Constants::ONE_OVER_PI;
     }
     return getBackgroundColor(ray);
 }
