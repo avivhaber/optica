@@ -12,9 +12,9 @@ INC_DIRS := $(shell find $(SRC_DIRS) -type d)
 INC_FLAGS := $(addprefix -I,$(INC_DIRS))
 
 CPPFLAGS ?= $(INC_FLAGS) -MMD -MP
-CXXFLAGS ?= -std=c++1z -Ofast -march=native -flto -g -Wall
+CXXFLAGS ?= -std=c++1z -Ofast -march=native -flto -g -Wall -Werror
 
-# buidl binary
+# build binary
 $(TARGET_EXEC): $(OBJS)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) -o $@ $(OBJS)
 

@@ -4,19 +4,17 @@
 #include "MathUtil.h"
 #include "Interval.h"
 #include <limits>
+#include <string>
 
 struct GeneralException;
 struct Intersection;
 class Object;
 
 struct GeneralException : std::exception {
-    char const* msg;
-    GeneralException(char const* msg) : msg(msg) {}
-    ~GeneralException() {
-        delete[] msg;
-    }
-    char const* what() const throw() {
-        return msg;
+    std::string msg;
+    GeneralException(std::string msg) noexcept: msg(msg) {}
+    char const* what() const noexcept {
+        return msg.c_str();
     }
 };
 
