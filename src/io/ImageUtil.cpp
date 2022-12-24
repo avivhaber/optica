@@ -4,13 +4,17 @@
 #include "MathUtil.h"
 
 #include <fstream>
+#include <filesystem>
 
-const std::string ImageUtil::outputFolder = "out/";
+const std::string ImageUtil::outputFolder = "out";
 const std::string ImageUtil::ppmExtension = ".ppm";
 const int ImageUtil::numDigits = 4;
 
 void ImageUtil::writeImage(const Frame& frame, std::string fileNameBase, int frameNum) {
-    std::ofstream ofs(outputFolder + fileNameBase + formatInt(frameNum) + ppmExtension, std::ios_base::out | std::ios_base::binary);
+    if (!std::filesystem::exists(outputFolder)) {
+        std::filesystem::create_directory(outputFolder);
+    }
+    std::ofstream ofs(outputFolder + "/" + fileNameBase + formatInt(frameNum) + ppmExtension, std::ios_base::out | std::ios_base::binary);
     ofs << "P6" << std::endl << frame.width << ' ' << frame.height << std::endl << "255" << std::endl;
 
     for (int y = 0; y < frame.height; y++) {
