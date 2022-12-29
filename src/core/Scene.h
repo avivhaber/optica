@@ -3,6 +3,7 @@
 #include "Object.h"
 #include "Vec3.h"
 #include "Renderer.h"
+
 #include <iostream>
 #include <unordered_map>
 #include <memory>
@@ -18,7 +19,7 @@ class Scene {
         Scene(int imageWidth, int imageHeight, float fov, float foc);
         Scene(Camera cam);
 
-        void add(const std::string& identifier, std::shared_ptr<Object> obj);
+        void add(std::shared_ptr<Object> obj, const std::string& identifier);
         void remove(const std::string& identifier);
         std::shared_ptr<Object> operator[](const std::string& identifier);
         void render();

@@ -6,7 +6,7 @@
 #include <iostream>
 
 int main() {
-    int x = 1920, y = 1080;
+    int x = 1280, y = 720;
     Scene scene(x, y);
     scene.renderer.spp = 2000;
     scene.renderer.sampler = &Samplers::rejection;
@@ -19,13 +19,12 @@ int main() {
     auto floor = make_shared<Plane>(Plane(Vec3(0, 1, 0), -0.5, Intervals::inf, Intervals::inf, Interval(-1,10)));
 
 
-    scene.add("s1", blue);
-    scene.add("s2", red);
-    scene.add("s3", green);
-    scene.add("floor", floor);
+    scene.add(blue, "sphere1");
+    scene.add(red, "sphere2");
+    scene.add(green, "sphere3");
+    scene.add(floor, "floor");
 
     scene.render();
-    
-    std::cout << std::endl;
+
     return 0;
 }

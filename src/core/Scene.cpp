@@ -34,6 +34,7 @@ void Scene::render() {
     }
     ImageUtil::writeImage(f, "render", currentFrame);
     currentFrame++;
+    std::cout << std::endl;
 }
 
 // Core function of ray tracer. Recursively gets the color of a given ray.
@@ -85,7 +86,7 @@ void Scene::renderAnimation(float& property, float endVal, int frameDuration) {
 
 // Adds an object to scene. Unlike the [] operator, add
 // checks to see if the identifier exists to avoid overwriting.
-void Scene::add(const std::string& identifier, std::shared_ptr<Object> obj) {
+void Scene::add(std::shared_ptr<Object> obj, const std::string& identifier) {
     if (objects.find(identifier) != objects.end()) {
         throw GeneralException("Identifier already exists in scene.");
     }
