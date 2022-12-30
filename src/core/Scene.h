@@ -2,6 +2,7 @@
 #include "Camera.h"
 #include "Object.h"
 #include "Vec3.h"
+#include "Colors.h"
 #include "Renderer.h"
 
 #include <iostream>

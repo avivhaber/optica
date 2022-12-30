@@ -1,5 +1,5 @@
-#include "ColorSet.h"
 #include "Vec3.h"
+#include "Colors.h"
 
 ColorSet::ColorSet() : x(0), y(0), z(0), samples(0) {}
 
@@ -11,7 +11,7 @@ void ColorSet::add(Color c) {
 }
 
 Color ColorSet::average() {
-    return Color(static_cast<float>(x/samples), static_cast<float>(y/samples), static_cast<float>(z/samples));
+    return Color(static_cast<float>(x / samples), static_cast<float>(y / samples), static_cast<float>(z / samples));
 }
 
 void ColorSet::clear() {

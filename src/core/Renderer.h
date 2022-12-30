@@ -1,5 +1,7 @@
 #pragma once
 #include "Sampler.h"
+#include "Colors.h"
+
 #include <cmath>
 
 // Constants and utilty functions for the renderer. The actual path tracer is in scene.h

@@ -1,5 +1,6 @@
 #pragma once
 #include "Vec3.h"
+#include "Colors.h"
 #include "Object.h"
 
 class Plane : public Object {

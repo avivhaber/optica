@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Vec3.h"
+#include "Colors.h"
 
 class Frame {
     public:
@@ -8,17 +9,9 @@ class Frame {
         int height;
         Color** buffer;
 
-        Frame(int width = 1, int height = 1) : width(width), height(height) {
-            buffer = new Color*[width];
-            for (int i = 0; i < width; i++) {
-                buffer[i] = new Color[height];
-            }
-        }
-
-        ~Frame() {
-            for (int i = 0; i < width; i++) {
-                delete[] buffer[i];
-            }
-            delete[] buffer;
-        }
+        Frame(int width = 1, int height = 1);
+        Frame(const Frame& other);
+        Frame& operator=(Frame other);
+        ~Frame();
+        friend void swap(Frame& first, Frame& second);
 };

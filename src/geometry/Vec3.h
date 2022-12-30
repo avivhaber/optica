@@ -4,7 +4,7 @@
 /*
 A class for representing geometric vectors in 3 dimensions.
 A Vec3 is considered invalid if any of its components are NaN.
-This can be checked with isValdid().
+This can be checked with isValid().
 */
 class Vec3 {
     public:
@@ -39,6 +39,6 @@ class Vec3 {
         std::string toString() const;
 };
 
-
-using Point = Vec3; // A point in 3D
-using Color = Vec3; // An RGB color. Ensure that each channel is between 0 and 1.
+// A point in 3D.
+// This is an alias for Vec3.
+using Point = Vec3;

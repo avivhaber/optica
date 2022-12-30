@@ -1,6 +1,7 @@
 #pragma once
 #include "Line.h"
 #include "Vec3.h"
+#include "Colors.h"
 #include "MathUtil.h"
 #include "Interval.h"
 #include <limits>

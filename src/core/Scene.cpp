@@ -4,13 +4,11 @@
 #include "Sphere.h"
 #include "ImageUtil.h"
 #include "MathUtil.h"
-#include "ColorSet.h"
+#include "Colors.h"
 #include "Vec3.h"
 #include <iostream>
 #include <limits>
 #include <algorithm>
-
-Point light(2, 2, 0);
 
 Scene::Scene(int imageWidth, int imageHeight) : camera(Camera(imageWidth, imageHeight)) {}
 Scene::Scene(int imageWidth, int imageHeight, float fov, float foc) : camera(Camera(imageWidth, imageHeight, fov, foc)) {}
