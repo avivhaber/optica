@@ -8,7 +8,7 @@
 #include <memory>
 
 int main() {
-    int x = 400, y = 300;
+    int x = 640, y = 360;
     Scene scene(x, y);
     scene.renderer.spp = 2000;
     scene.renderer.sampler = &Samplers::rejection;

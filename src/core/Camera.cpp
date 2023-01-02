@@ -8,8 +8,7 @@ Camera::Camera(
     int imageWidth,
     int imageHeight,
     float horizontalFov,
-    float focalLength) : 
-        position(Point(0, 0, 0)),
+    float focalLength) :
         imageWidth(imageWidth),
         imageHeight(imageHeight),
         focalLength(focalLength),
@@ -17,19 +16,12 @@ Camera::Camera(
     updateCameraVariables();
 }
 
-/**
- * Generates a ray originating from the camera and going through the image plane.
- * Ensure that 0<=xIndex<=imageWidth-1 and similarly for yIndex.
- * As an example, (0, 0) represents the bottom left, and (imageWidth-1, imageHeight-1) represents the top right.
-*/ 
 Line Camera::getCameraRay(float xIndex, float yIndex) {
     Point pixel = bottomLeftPixel;
     pixel += Vec3(pixelSize * xIndex, pixelSize * yIndex, 0);
     return Line(position, pixel-position);
 }
 
-// Same as getCameraRay, but randomly pertrubes the position within a viewport pixel.
-// Used for AA and smoothing.
 Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) {
     float xoff = MathUtil::rand() - 0.5f;
     float yoff = MathUtil::rand() - 0.5f;
