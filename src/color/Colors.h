@@ -17,3 +17,9 @@ class ColorSet {
         double x, y, z;
         long long samples;
 };
+
+namespace Colors {
+    inline const Color BLACK {0, 0, 0};
+    inline const Color WHITE {1, 1, 1};
+    inline const Color SKY_BLUE {0.5, 0.7, 1};
+}

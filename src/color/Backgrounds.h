@@ -25,14 +25,14 @@ namespace Backgrounds {
         return [bottom, top](const Line& ray) {
             Vec3 dir = ray.direction.normalize();
             float t = (dir.y + 1.0f) / 2.0f;
-            return bottom + ((top - bottom) * t);   
+            return bottom + ((top - bottom) * t);
         };
     }
 
     // Dispays a white and light-blue sky. Default background implementation.
     inline BackgroundGenerator blueSky() {
-        Color bottom = Color(1, 1, 1);
-        Color top = Color(0.5, 0.7, 1);
+        Color bottom = Colors::WHITE;
+        Color top = Colors::SKY_BLUE;
         return gradientBackground(bottom, top);
     }
 }
