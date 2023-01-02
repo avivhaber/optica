@@ -6,6 +6,7 @@
 #include "MathUtil.h"
 #include "Colors.h"
 #include "Vec3.h"
+#include "Exceptions.h"
 #include <iostream>
 #include <limits>
 #include <algorithm>
@@ -47,7 +48,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
         //return closest.obj->colorAt(closest.point) * cosTheta;
         return closest.obj->colorAt(closest.point) * getRayColor(nextRay, depth+1) * Constants::ONE_OVER_PI;
     }
-    return getBackgroundColor(ray);
+    return backgroundColor(ray);
 }
 
 // Returns the closest object that intersects with ray.
@@ -64,14 +65,6 @@ Intersection Scene::getClosest(const Line& ray) {
     return closest;
 }
 
-Color Scene::getBackgroundColor(const Line& ray) {
-    Vec3 dir = ray.direction.normalize();
-    float t = (dir.y + 1.0f) / 2.0f;
-    Color bottom = Color(1, 1, 1);
-    Color top = Color(0.5, 0.7, 1);
-    return bottom+((top-bottom)*t);
-}
-
 void Scene::renderAnimation(float& property, float endVal, int frameDuration) {
     float delta = (endVal-property) / (float)frameDuration;
 
@@ -82,8 +75,6 @@ void Scene::renderAnimation(float& property, float endVal, int frameDuration) {
     }
 }
 
-// Adds an object to scene. Unlike the [] operator, add
-// checks to see if the identifier exists to avoid overwriting.
 void Scene::add(std::shared_ptr<Object> obj, const std::string& identifier) {
     if (objects.find(identifier) != objects.end()) {
         throw GeneralException("Identifier already exists in scene.");
@@ -91,7 +82,6 @@ void Scene::add(std::shared_ptr<Object> obj, const std::string& identifier) {
     objects[identifier] = obj;
 }
 
-// Removes an object from the scene.
 void Scene::remove(const std::string& identifier) {
     int n = objects.erase(identifier);
     if (n == 0) {
@@ -101,4 +91,19 @@ void Scene::remove(const std::string& identifier) {
 
 std::shared_ptr<Object> Scene::operator[](const std::string& identifier) {
     return objects[identifier];
+}
+
+std::unordered_map<std::string, std::shared_ptr<Object>>::iterator Scene::begin() {
+    return objects.begin();
+}
+std::unordered_map<std::string, std::shared_ptr<Object>>::iterator Scene::end() {
+    return objects.end();
+}
+
+Color skyGradientBackground(const Line& ray) {
+    Vec3 dir = ray.direction.normalize();
+    float t = (dir.y + 1.0f) / 2.0f;
+    Color bottom = Color(1, 1, 1);
+    Color top = Color(0.5, 0.7, 1);
+    return bottom + ((top - bottom) * t);
 }

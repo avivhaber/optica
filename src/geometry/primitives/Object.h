@@ -4,34 +4,14 @@
 #include "Colors.h"
 #include "MathUtil.h"
 #include "Interval.h"
+#include "Intersection.h"
 #include <limits>
 #include <string>
 
-struct GeneralException;
 struct Intersection;
-class Object;
 
-struct GeneralException : std::exception {
-    std::string msg;
-    GeneralException(std::string msg) noexcept: msg(msg) {}
-    char const* what() const noexcept {
-        return msg.c_str();
-    }
-};
-
-// Represents the outcome of an intersection test.
-struct Intersection {
-    bool hit; // Whether an intersection occured
-    const Object* obj; // The object that was hit. Ensure that obj does not get deleted before this Intersection object.
-    float t; // The value of parameter t that corresponds to intersection
-    Point point; // The point of intersection
-
-    Intersection(bool hit = false, const Object* obj = nullptr, float t = Constants::FLOAT_INF, Point point = Point())
-    : hit(hit), obj(obj), t(t), point(point) {}
-};
-
-// Represents a renderable object in the scene.
-// Object is an abstract class that acts as a base for different geometries.
+// Abstract class that represents a renderable object in the scene.
+// Different geometries should inherit from this class.
 class Object {
     public:
         virtual Vec3 normalAt(const Point& point) const = 0;

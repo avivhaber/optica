@@ -43,6 +43,17 @@
         "functional": "cpp",
         "iterator": "cpp",
         "numeric": "cpp",
-        "random": "cpp"
+        "random": "cpp",
+        "bit": "cpp",
+        "chrono": "cpp",
+        "cinttypes": "cpp",
+        "codecvt": "cpp",
+        "compare": "cpp",
+        "concepts": "cpp",
+        "cstring": "cpp",
+        "ctime": "cpp",
+        "ratio": "cpp",
+        "iomanip": "cpp",
+        "numbers": "cpp"
     }
 }
