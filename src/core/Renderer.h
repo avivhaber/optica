@@ -7,12 +7,32 @@
 // Constants and utilty functions for the renderer. The actual path tracer is in scene.h
 class Renderer {
     public:
-        int spp; // Samples per pixel.
+        /**
+         * The renderer will shoot many randomly perturbed rays for each pixel and then
+         * average out the result. This value determines how many samples for each pixel.
+         * A higher value will give a sharper and less noisy image, at the cost of an
+         * increased render time.
+        */ 
+        int samplesPerPixel;
+        /**
+         * Max recursion depth of the ray tracer. A higher value will give more accurate
+         * reflections and potentially more accurate shadows, at the cost of increase
+         * render time.
+        */ 
         int maxDepth;
-        float albedo {0.5};
-        float gamma {2.0}; // Used for gamma correction. colorOut = colorIn ^ (1/gamma).
+        /**
+         * Used for gamma color correction. colorOut = colorIn ^ (1/gamma).
+        */ 
+        float gamma {2.0};
+        /**
+         * Threshold value for detecting if an intersection occured.
+         * Ensures that ray originating from object does not intersect with itself.
+        */ 
         float tMin {0.0001};
-        const Sampler* sampler; // The function which generates a random hemispherical direction
+        /**
+         * Function which generates a random hemispherical direction given an intersection.
+        */ 
+        const Sampler* sampler;
 
         Renderer(int spp = 10, int maxDepth = 20, const Sampler* sampler = &Samplers::rejection);
 

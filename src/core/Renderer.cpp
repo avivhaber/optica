@@ -12,7 +12,7 @@ Color Renderer::gammaCorrect(const Color& in) const {
     return Color(pow(in.x, exp), pow(in.y, exp), pow(in.z, exp));
 }
 
-Renderer::Renderer(int spp, int maxDepth, const Sampler* sampler)
-: spp(spp), maxDepth(maxDepth), sampler(sampler) {
+Renderer::Renderer(int samplesPerPixel, int maxDepth, const Sampler* sampler)
+: samplesPerPixel(samplesPerPixel), maxDepth(maxDepth), sampler(sampler) {
     this->sampler = sampler;
 }

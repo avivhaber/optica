@@ -4,15 +4,13 @@
 #include "Vec3.h"
 #include "Colors.h"
 #include "Renderer.h"
+#include "Backgrounds.h"
 
 #include <iostream>
 #include <unordered_map>
 #include <memory>
 #include <functional>
 
-// Default implementation of backgroundColor.
-// Displays a blue gradient based off ray's y-value.
-Color skyGradientBackground(const Line& ray);
 
 class Scene {
     public:
@@ -35,10 +33,7 @@ class Scene {
 
         void render();
         void renderAnimation(float& property, float endVal, int frameDuration);
-        // The background color of this Scene. Can vary depending on ray direction.
-        // More specifically: Given a ray that does not intersect with any object
-        // and will shoot off to the sky, return the Color this ray should use.
-        std::function<Color(const Line&)> backgroundColor = skyGradientBackground;
+        BackgroundGenerator background = Backgrounds::blueSky();
 
     private:
         std::unordered_map<std::string, std::shared_ptr<Object>> objects;

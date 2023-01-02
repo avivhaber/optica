@@ -22,7 +22,7 @@ void Scene::render() {
     for (int y = 0; y < f.height; y++) {
         for (int x = 0; x < f.width; x++) {
             ColorSet c;
-            for (int i = 0; i < renderer.spp; i++) {
+            for (int i = 0; i < renderer.samplesPerPixel; i++) {
                 Line ray = camera.getCameraRayPertrubed(x, y);
                 c.add(getRayColor(ray, 1));
             }
@@ -48,7 +48,7 @@ Color Scene::getRayColor(const Line& ray, int depth) {
         //return closest.obj->colorAt(closest.point) * cosTheta;
         return closest.obj->colorAt(closest.point) * getRayColor(nextRay, depth+1) * Constants::ONE_OVER_PI;
     }
-    return backgroundColor(ray);
+    return background(ray);
 }
 
 // Returns the closest object that intersects with ray.
@@ -98,12 +98,4 @@ std::unordered_map<std::string, std::shared_ptr<Object>>::iterator Scene::begin(
 }
 std::unordered_map<std::string, std::shared_ptr<Object>>::iterator Scene::end() {
     return objects.end();
-}
-
-Color skyGradientBackground(const Line& ray) {
-    Vec3 dir = ray.direction.normalize();
-    float t = (dir.y + 1.0f) / 2.0f;
-    Color bottom = Color(1, 1, 1);
-    Color top = Color(0.5, 0.7, 1);
-    return bottom + ((top - bottom) * t);
 }

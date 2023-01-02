@@ -8,9 +8,9 @@
 #include <memory>
 
 int main() {
-    int x = 640, y = 360;
+    int x = 1280, y = 720;
     Scene scene(x, y);
-    scene.renderer.spp = 2000;
+    scene.renderer.samplesPerPixel = 1;
     scene.renderer.sampler = &Samplers::rejection;
 
     auto blue = std::make_shared<Sphere>(Point(0, 0, 2), 0.5, Color(0, 0.31, 0.43));
