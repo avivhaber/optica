@@ -28,4 +28,9 @@ namespace Colors {
     inline const Color CYAN {0, 1, 1};
     inline const Color MAGENTA {1, 0, 1};
     inline const Color SKY_BLUE {0.5, 0.7, 1};
+    inline const Color DARK_BLUE {0, 0.31, 0.43};
+    inline const Color LIGHT_CYAN {0.5, 0.8, 0.9};
+    inline const Color SALMON {1, 0.31, 0.43};
+    inline const Color BRIGHT_GREEN {0.34, 1, 0.06};
+    inline const Color ORANGE {0.96, 0.28, 0.03};
 }

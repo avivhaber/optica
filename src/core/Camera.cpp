@@ -16,13 +16,14 @@ Camera::Camera(
     updateCameraVariables();
 }
 
-Line Camera::getCameraRay(float xIndex, float yIndex) const {
+Line Camera::getCameraRay(float xIndex, float yIndex) {
+    updateCameraVariables();
     Point pixel = bottomLeftPixel;
     pixel += Vec3(pixelSize * xIndex, pixelSize * yIndex, 0);
     return Line(position, pixel-position);
 }
 
-Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) const {
+Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) {
     float xoff = MathUtil::rand() - 0.5f;
     float yoff = MathUtil::rand() - 0.5f;
     return getCameraRay(xIndex + xoff, yIndex + yoff);

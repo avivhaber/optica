@@ -18,14 +18,14 @@ class Camera {
          * Ensure that 0<=xIndex<=imageWidth-1 and 0<=yIndex<=imageHeight-1.
          * (0, 0) represents the bottom left pixel, and (imageWidth-1, imageHeight-1) represents the top right pixel.
         */ 
-        Line getCameraRay(float xIndex, float yIndex) const;
+        Line getCameraRay(float xIndex, float yIndex);
         /**
          * Works the same as getcamerRay, but the returned ray will point to a uniformly random position in the specified pixel.
          * This function is useful for supersmapling.
          * Ensure that 0<=xIndex<=imageWidth-1 and 0<=yIndex<=imageHeight-1.
          * (0, 0) represents the bottom left pixel, and (imageWidth-1, imageHeight-1) represents the top right pixel.
         */ 
-        Line getCameraRayPertrubed(int xIndex, int yIndex) const;
+        Line getCameraRayPertrubed(int xIndex, int yIndex);
 
         float getFocalLength() const; // Gets the focal length (distance from image plane to focal point).
         void setFocalLength(float foc); // Sets the focal length (distance from image plane to focal point).

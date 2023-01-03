@@ -44,8 +44,10 @@ class Renderer {
 
         // Renders the scene and saves the rendered image to disk.
         void render(const Scene& scene);
-        // Linearly interpolates "property" between its current value and endVal. Renders numFrames frames.
-        void keyFrameAnimation(const Scene& scene, float& property, float endVal, int numFrames);
+        // Linearly interpolates "property" between its current value and endVal based off numFrames.
+        // "property" is passed by reference and modified in this function. It can be any kind of
+        // scene or renderer parameter. Renders numFrames + 1 frames in total.
+        void renderKeyFrameAnimation(const Scene& scene, float& property, float endVal, int numFrames);
 
     private:
         int currentFrame = 1;

@@ -15,7 +15,7 @@ Renderer::Renderer(int width, int height, float fov, float focalLength, int samp
 Renderer::Renderer(const Camera& camera, int samplesPerPixel, int maxDepth)
 : camera(camera), samplesPerPixel(samplesPerPixel), maxDepth(maxDepth) {}
 
-void Renderer::keyFrameAnimation(const Scene& scene, float& property, float endVal, int numFrames) {
+void Renderer::renderKeyFrameAnimation(const Scene& scene, float& property, float endVal, int numFrames) {
     float delta = (endVal - property) / ((float) numFrames);
     render(scene);
     for (int i = 0; i < numFrames; i++) {
