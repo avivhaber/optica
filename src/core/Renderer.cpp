@@ -1,6 +1,6 @@
 #include "Renderer.h"
-#include <iostream>
 #include <cmath>
+#include <iostream>
 #include "Frame.h"
 #include "ImageUtil.h"
 #include "Intersection.h"
