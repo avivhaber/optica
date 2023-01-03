@@ -14,7 +14,7 @@ int main() {
   int y = 720;
   Scene scene;
   Renderer renderer(x, y);
-  renderer.samplesPerPixel = 1000;
+  renderer.samplesPerPixel = 100;
 
   auto blue = std::make_shared<Sphere>(
       Point(0, 0, 2), 0.5,
