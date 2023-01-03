@@ -1,5 +1,4 @@
 #include "Color.h"
-#include "Vec3.h"
 
 ColorSet::ColorSet() : x(0), y(0), z(0), samples(0) {}
 

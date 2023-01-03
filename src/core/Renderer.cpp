@@ -1,4 +1,5 @@
 #include "Renderer.h"
+#include <iostream>
 #include <cmath>
 #include "Frame.h"
 #include "ImageUtil.h"

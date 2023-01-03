@@ -1,7 +1,5 @@
 #include "Sphere.h"
-#include <algorithm>
 #include <cmath>
-#include <iostream>
 #include "Line.h"
 #include "Material.h"
 #include "MathUtil.h"
@@ -51,8 +49,8 @@ Point Sphere::worldToObjectSpace(const Point& point) const {
 std::pair<double, double> Sphere::objectToTextureSpace(
     const Point& point) const {
   Point p = point.normalize();
-  double u = 0.5f + atan2(p.z, p.x) / (2 * Constants::PI);
-  double v = 0.5f + asin(p.y) / Constants::PI;
+  double u = 0.5f + std::atan2(p.z, p.x) / (2 * Constants::PI);
+  double v = 0.5f + std::asin(p.y) / Constants::PI;
   return std::make_pair(u, v);
 }
 

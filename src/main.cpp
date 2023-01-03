@@ -1,7 +1,5 @@
-#include <iostream>
 #include <memory>
 #include "Color.h"
-#include "MathUtil.h"
 #include "Plane.h"
 #include "Renderer.h"
 #include "Scene.h"

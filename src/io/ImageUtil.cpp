@@ -2,7 +2,6 @@
 #include "Color.h"
 #include "Frame.h"
 #include "MathUtil.h"
-#include "Vec3.h"
 
 #include <filesystem>
 #include <fstream>

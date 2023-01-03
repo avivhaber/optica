@@ -1,13 +1,10 @@
 #pragma once
-#include <limits>
-#include <string>
 #include <utility>
 #include "Color.h"
 #include "Intersection.h"
 #include "Interval.h"
 #include "Line.h"
 #include "Material.h"
-#include "MathUtil.h"
 #include "Vec3.h"
 
 struct Intersection;

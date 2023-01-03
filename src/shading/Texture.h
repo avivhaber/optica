@@ -2,7 +2,6 @@
 #include <cmath>
 #include <functional>
 #include "Color.h"
-#include "Line.h"
 #include "Vec3.h"
 
 /**
@@ -20,10 +19,10 @@ inline Texture COLOR(const Color& color) {
 inline Texture CHECKERBOARD(const Color& color1, const Color& color2,
                             float squareWidth) {
   return [color1, color2, squareWidth](double u, double v, const Point& point) {
-    bool cx = std::abs(fmod(u, 2.0f * squareWidth)) < (squareWidth);
+    bool cx = std::abs(std::fmod(u, 2.0f * squareWidth)) < (squareWidth);
     cx = u < 0 ? !cx : cx;
 
-    bool cz = std::abs(fmod(v, 2.0f * squareWidth)) < (squareWidth);
+    bool cz = std::abs(std::fmod(v, 2.0f * squareWidth)) < (squareWidth);
     cz = v < 0 ? !cz : cz;
 
     if (cx != cz) return color1;

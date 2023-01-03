@@ -1,6 +1,5 @@
 #include "Camera.h"
 #include <cmath>
-#include <iostream>
 #include "Line.h"
 #include "Vec3.h"
 

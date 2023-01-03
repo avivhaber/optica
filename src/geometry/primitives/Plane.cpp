@@ -1,7 +1,5 @@
 #include "Plane.h"
 #include "Vec3.h"
-#include "cmath"
-#include "iostream"
 
 Vec3 Plane::normalAt(const Point& point) const { return normal; }
 
@@ -48,6 +46,5 @@ Point Plane::worldToObjectSpace(const Point& point) const {
 
 std::pair<double, double> Plane::objectToTextureSpace(
     const Point& point) const {
-  // TODO: Fix texture scaling for planes
   return std::make_pair(point.x, point.y);
 }

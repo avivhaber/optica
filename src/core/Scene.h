@@ -1,12 +1,8 @@
 #pragma once
 #include "Backgrounds.h"
-#include "Camera.h"
-#include "Color.h"
 #include "Object.h"
-#include "Vec3.h"
 
 #include <functional>
-#include <iostream>
 #include <memory>
 #include <unordered_map>
 

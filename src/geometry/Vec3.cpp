@@ -88,7 +88,7 @@ Vec3 Vec3::randomUnitVec() {
   float theta = MathUtil::rand(0, 2 * Constants::PI);
   float z = MathUtil::rand(-1, 1);
   float r = sqrt(1 - z * z);
-  return Vec3(r * cos(theta), r * sin(theta), z);
+  return Vec3(r * std::cos(theta), r * std::sin(theta), z);
 }
 
 std::string Vec3::toString() const {

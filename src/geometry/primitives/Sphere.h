@@ -1,5 +1,4 @@
 #pragma once
-#include "Color.h"
 #include "Material.h"
 #include "Object.h"
 #include "Vec3.h"
