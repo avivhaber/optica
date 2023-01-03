@@ -20,6 +20,7 @@ class Vec3 {
         Vec3& operator/=(const float s);
         Vec3 operator+(const Vec3& v) const;
         Vec3 operator-(const Vec3& v) const;
+        // element-wise multiplication.
         Vec3 operator*(const Vec3& v) const;
         Vec3 operator*(const float s) const;
         Vec3 operator/(const float s) const;
@@ -34,7 +35,10 @@ class Vec3 {
         float length2() const;
         Vec3 normalize() const;
         bool isValid();
+        // Each component is unformly distributed over [min, max)
         static Vec3 randVec(float min, float max);
+        // Returns a uniformly distributed unit vector.
+        // Uses method described here: https://math.stackexchange.com/a/1586015
         static Vec3 randomUnitVec();
         std::string toString() const;
 

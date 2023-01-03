@@ -14,12 +14,6 @@ Vec3 Sphere::normalAt(const Point& point) const {
 
 Sphere::Sphere(Point center, float radius, Material material) : Object(material), center(center), radius(radius) {}
 
-/**
- * Finds the point where the line and sphere intersect.
- * If there's 0 or 1 solutions, the returned point will be invalid (NaN components).
- * If there's 2 solutions, and both t's are positive, the smaller one is returned.
- * If not both positive, the greater t is returned.
-*/
 Intersection Sphere::rayIntersection(const Line& ray, Interval tRange) const {
     Vec3 u = ray.origin - center;
     Vec3 d = ray.direction;

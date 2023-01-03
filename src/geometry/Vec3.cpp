@@ -36,7 +36,6 @@ Vec3 Vec3::operator+(const Vec3& v) const {
 Vec3 Vec3::operator-(const Vec3& v) const {
     return Vec3(x-v.x, y-v.y, z-v.z);
 }
-// element-wise multiply
 Vec3 Vec3::operator*(const Vec3& v) const {
     return Vec3(x*v.x, y*v.y, z*v.z);
 }
@@ -88,13 +87,10 @@ bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
 }
 
-// Each component is unformly distributed over [-1,1)
 Vec3 Vec3::randVec(float min, float max) {
     return Vec3(MathUtil::rand(min,max), MathUtil::rand(min,max), MathUtil::rand(min,max));
 }
 
-// Returns a unofmrly distributed unit vector.
-// Uses method described here: https://math.stackexchange.com/a/1586015
 Vec3 Vec3::randomUnitVec() {
     float theta = MathUtil::rand(0, 2*Constants::PI);
     float z = MathUtil::rand(-1, 1);
