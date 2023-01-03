@@ -1,17 +1,17 @@
 #pragma once
 
-#include "Vec3.h"
 #include "Color.h"
+#include "Vec3.h"
 
 class Frame {
-    public:
-        int width;
-        int height;
-        Color** buffer;
+ public:
+  int width;
+  int height;
+  Color** buffer;
 
-        Frame(int width = 1, int height = 1);
-        Frame(const Frame& other);
-        Frame& operator=(Frame other);
-        ~Frame();
-        friend void swap(Frame& first, Frame& second);
+  Frame(int width = 1, int height = 1);
+  Frame(const Frame& other);
+  Frame& operator=(Frame other);
+  ~Frame();
+  friend void swap(Frame& first, Frame& second);
 };
