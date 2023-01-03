@@ -11,7 +11,7 @@ const std::string ImageUtil::outputFolder = "out";
 const std::string ImageUtil::ppmExtension = ".ppm";
 const int ImageUtil::numDigits = 4;
 
-void ImageUtil::writeImage(const Frame& frame, std::string fileNameBase,
+void ImageUtil::writeImage(const Frame& frame, const std::string& fileNameBase,
                            int frameNum) {
   if (!std::filesystem::exists(outputFolder)) {
     std::filesystem::create_directory(outputFolder);
