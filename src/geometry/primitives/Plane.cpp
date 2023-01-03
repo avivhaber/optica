@@ -28,7 +28,7 @@ Intersection Plane::rayIntersection(const Line& ray, Interval tRange) const {
         return Intersection(false);
     }
 
-    return Intersection(true, this, t, p);
+    return Intersection(true, t, p);
 }
 
 Point Plane::worldToObjectSpace(const Point& point) const {

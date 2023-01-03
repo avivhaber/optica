@@ -16,13 +16,13 @@ Camera::Camera(
     updateCameraVariables();
 }
 
-Line Camera::getCameraRay(float xIndex, float yIndex) {
+Line Camera::getCameraRay(float xIndex, float yIndex) const {
     Point pixel = bottomLeftPixel;
     pixel += Vec3(pixelSize * xIndex, pixelSize * yIndex, 0);
     return Line(position, pixel-position);
 }
 
-Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) {
+Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) const {
     float xoff = MathUtil::rand() - 0.5f;
     float yoff = MathUtil::rand() - 0.5f;
     return getCameraRay(xIndex + xoff, yIndex + yoff);
@@ -39,10 +39,10 @@ void Camera::updateCameraVariables() {
     bottomLeftPixel.x -= viewportWidth / 2.0f;
 }
 
-float Camera::getFocalLength() {return focalLength;}
-float Camera::getHorizontalFov() {return horizontalFov;}
-int Camera::getImageWidth() {return imageWidth;}
-int Camera::getImageHeight() {return imageHeight;}
+float Camera::getFocalLength() const {return focalLength;}
+float Camera::getHorizontalFov() const {return horizontalFov;}
+int Camera::getImageWidth() const {return imageWidth;}
+int Camera::getImageHeight() const {return imageHeight;}
 
 void Camera::setFocalLength(float foc) {
     focalLength = foc;

@@ -1,4 +1,5 @@
 #include "Scene.h"
+#include "Renderer.h"
 #include "Sphere.h"
 #include "Plane.h"
 #include "Vec3.h"
@@ -9,9 +10,11 @@
 #include <memory>
 
 int main() {
-    int x = 1280, y = 720;
-    Scene scene(x, y);
-    scene.renderer.samplesPerPixel = 20;
+    int x = 1280;
+    int y = 720;
+    Scene scene;
+    Renderer renderer(x, y);
+    renderer.samplesPerPixel = 50;
 
     Color teal = Color(0, 0.31, 0.43);
     Color lightBlue = Color(0.5, 0.8, 0.9);
@@ -26,7 +29,7 @@ int main() {
     scene.add(green, "sphere3");
     scene.add(floor, "floor");
 
-    scene.render();
+    renderer.render(scene);
 
     return 0;
 }

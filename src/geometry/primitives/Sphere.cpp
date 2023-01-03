@@ -42,7 +42,7 @@ Intersection Sphere::rayIntersection(const Line& ray, Interval tRange) const {
         return Intersection(false);
     }
     Point poi = ray.at(t);
-    return Intersection(true, this, t, poi);
+    return Intersection(true, t, poi);
 }
 
 Point Sphere::worldToObjectSpace(const Point& point) const {
