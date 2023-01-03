@@ -87,6 +87,11 @@ bool Vec3::isValid() {
     return !std::isnan(x) && !std::isnan(y) && !std::isnan(z);
 }
 
+bool Vec3::nearZero() {
+    float t = 1e-8;
+    return std::abs(x) < t && std::abs(y) < t && std::abs(z) < t;
+}
+
 Vec3 Vec3::randVec(float min, float max) {
     return Vec3(MathUtil::rand(min,max), MathUtil::rand(min,max), MathUtil::rand(min,max));
 }

@@ -29,8 +29,25 @@ namespace Materials {
     // Variation of the previous that samples a random point on the unit sphere instead of inside it.
     inline Line DIFFUSE2(const Line& incoming, const Point& hit, const Vec3& normal) {
         Vec3 ran = Vec3::randomUnitVec();
-        if (ran.length2() < 1e-8) ran = Vec3(0,0,0);
+        if (ran.nearZero()) ran = Vec3(0,0,0);
         return Line(hit, normal+ran);
+    }
+
+    // Reflective mirror material. Angle of incidence == Angle of reflection.
+    // For a perfect mirror, the color should be pure white.
+    inline Line MIRROR(const Line& incoming, const Point& hit, const Vec3& normal) {
+        Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
+        return Line(hit, reflected);
+    }
+
+    // Like the normal mirror, but with some perturbation.
+    // A fuzziness too high will cause visual bugs.
+    inline Sampler FUZZY_MIRROR(float fuzziness) {
+        return [fuzziness](const Line& incoming, const Point& hit, const Vec3& normal) {
+            Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
+            reflected += Vec3::randomUnitVec() * fuzziness;
+            return Line(hit, reflected);
+        };
     }
 
     // Samples a random point inside the hemisphere at the hit point. Doesn't take into account 

@@ -35,6 +35,7 @@ class Vec3 {
         float length2() const;
         Vec3 normalize() const;
         bool isValid();
+        bool nearZero();
         // Each component is unformly distributed over [min, max)
         static Vec3 randVec(float min, float max);
         // Returns a uniformly distributed unit vector.
