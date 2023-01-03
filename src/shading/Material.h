@@ -2,6 +2,7 @@
 #include "Color.h"
 #include "Vec3.h"
 #include "Line.h"
+#include "Texture.h"
 #include <functional>
 
 /**
@@ -44,9 +45,10 @@ namespace Materials {
 // Material determines how an object is shaded, indepdendent of its geometry.
 class Material {
     public:
-        Color color;
+        Texture texture;
         Sampler sampleNextRay;
-        Material(Color color = Colors::WHITE, Sampler sampler = Materials::DIFFUSE) : color(color), sampleNextRay(sampler) {}
+        Material(Color color = Colors::WHITE, Sampler sampler = Materials::DIFFUSE) : texture(Textures::COLOR(color)), sampleNextRay(sampler) {}
+        Material(const Texture& texture, Sampler sampler = Materials::DIFFUSE) : texture(texture), sampleNextRay(sampler) {}
 };
 
 

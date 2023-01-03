@@ -29,7 +29,8 @@ void Scene::render() {
             f.buffer[x][y] = renderer.gammaCorrect(c.average());
         }
         // Update render progress
-        std::cout << "\rRendering frame " << currentFrame << "..." << " (" << (100*y*f.width)/(f.width*f.height) << "%)" << std::flush;
+        int percentFinished = (100 * (y + 1)) / f.height;
+        std::cout << "\rRendering frame " << currentFrame << "..." << " (" << percentFinished << "%)" << std::flush;
     }
     ImageUtil::writeImage(f, "render", currentFrame);
     currentFrame++;

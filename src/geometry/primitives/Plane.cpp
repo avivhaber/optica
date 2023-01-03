@@ -7,21 +7,6 @@ Vec3 Plane::normalAt(const Point& point) const {
     return normal;
 }
 
-// Generate checkerboard pattern
-Color colorAt(const Point& point) {
-    static Color c1 = Color(1, 1, 0);
-    static Color c2 = Color(1, 0, 0);
-    float size = 0.2f;
-    bool cx = abs(fmod(point.x, 2.0f*size)) < (size);
-    cx = point.x < 0 ? !cx : cx;
-
-    bool cz = abs(fmod(point.z, 2.0f*size)) < (size);
-    cz = point.z < 0 ? !cz : cz;
-
-    if (cx != cz) return c1;
-    return c2;
-}
-
 Plane::Plane(Vec3 normal, float D, Interval x, Interval y, Interval z, Material material) : Object(material), xRange(x), yRange(y), zRange(z) {
     float len = normal.length();
     this->normal = normal / len;
