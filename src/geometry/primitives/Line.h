@@ -6,9 +6,9 @@ class Line {
         Point origin;
         Vec3 direction;
 
-        Line(Point origin = Point(0 , 0, 0), Vec3 direction = Vec3(1, 1, 1)) : origin(origin), direction(direction) {}
+        Line(Point origin = Point(0, 0, 0), Vec3 direction = Vec3(1, 1, 1)) : origin(origin), direction(direction) {}
 
         Point at(float t) const {
             return origin + direction * t; 
-        }      
+        }
 };

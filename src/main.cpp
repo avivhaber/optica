@@ -2,7 +2,7 @@
 #include "Sphere.h"
 #include "Plane.h"
 #include "Vec3.h"
-#include "Colors.h"
+#include "Color.h"
 #include "MathUtil.h"
 #include <iostream>
 #include <memory>
@@ -10,8 +10,7 @@
 int main() {
     int x = 1280, y = 720;
     Scene scene(x, y);
-    scene.renderer.samplesPerPixel = 1;
-    scene.renderer.sampler = &Samplers::rejection;
+    scene.renderer.samplesPerPixel = 200;
 
     auto blue = std::make_shared<Sphere>(Point(0, 0, 2), 0.5, Color(0, 0.31, 0.43));
     auto red = std::make_shared<Sphere>(Point(1, 0, 3), 0.5, Color(1, 0.31, 0.43));

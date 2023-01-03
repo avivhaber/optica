@@ -22,6 +22,11 @@ namespace MathUtil {
         return std::min(max, std::max(min, num));
     }
 
+    // Linearly interpolate between x0 and x1 according to parameter t.
+    inline double lerp(double x0, double x1, double t) {
+        return (1 - t) * x0 + t * x1;
+    }
+
     // Returns a random float in the range [0,1)
     inline float rand() {
         static std::default_random_engine generator;

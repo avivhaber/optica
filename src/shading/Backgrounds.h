@@ -1,5 +1,5 @@
 #pragma once
-#include "Colors.h"
+#include "Color.h"
 #include "Vec3.h"
 #include "Line.h"
 #include <functional>

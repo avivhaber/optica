@@ -1,7 +1,7 @@
 #include <string>
 
-struct GeneralException : std::exception {
+struct GeneralException : public std::exception {
     std::string msg;
-    GeneralException(std::string msg) noexcept;
-    char const* what() const noexcept override;
+    GeneralException(std::string msg) noexcept : msg(msg) {}
+    char const* what() const noexcept override {return msg.c_str();}
 };

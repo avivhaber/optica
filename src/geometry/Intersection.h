@@ -12,5 +12,6 @@ struct Intersection {
     float t; // The value of the Ray's parameter t at the point of intersection.
     Point point; // The point of intersection.
 
-    Intersection(bool hit = false, const Object* obj = nullptr, float t = Constants::FLOAT_INF, Point point = Point());
+    Intersection(bool hit = false, const Object* obj = nullptr, float t = Constants::FLOAT_INF, Point point = Point())
+    : hit(hit), obj(obj), t(t), point(point) {}
 };

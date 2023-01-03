@@ -37,7 +37,13 @@ class Vec3 {
         static Vec3 randVec(float min, float max);
         static Vec3 randomUnitVec();
         std::string toString() const;
+
+        friend bool operator== (const Vec3& v1, const Vec3& v2);
+        friend bool operator!= (const Vec3& v1, const Vec3& v2);
 };
+
+bool operator== (const Vec3& v1, const Vec3& v2);
+bool operator!= (const Vec3& v1, const Vec3& v2);
 
 // A point in 3D.
 // This is an alias for Vec3.

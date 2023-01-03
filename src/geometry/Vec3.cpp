@@ -105,3 +105,11 @@ Vec3 Vec3::randomUnitVec() {
 std::string Vec3::toString() const {
     return "x: " + std::to_string(x) + ", y: " + std::to_string(y) + ", z: " + std::to_string(z);
 }
+
+bool operator== (const Vec3& v1, const Vec3& v2) {
+    return v1.x == v2.x && v1.y == v2.y && v1.z == v2.z;
+}
+
+bool operator!= (const Vec3& v1, const Vec3& v2) {
+    return !(v1 == v2);
+}

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Vec3.h"
-#include "Colors.h"
+#include "Color.h"
 
 class Frame {
     public:

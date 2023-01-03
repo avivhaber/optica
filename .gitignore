@@ -3,3 +3,4 @@ screenshots/*
 !screenshots/example*.png
 out/*
 optica
+.vscode/*

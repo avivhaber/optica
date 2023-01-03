@@ -3,6 +3,7 @@
 #include "Line.h"
 #include "Object.h"
 #include "MathUtil.h"
+#include "Material.h"
 #include <cmath>
 #include <algorithm>
 #include <iostream>
@@ -11,11 +12,7 @@ Vec3 Sphere::normalAt(const Point& point) const {
     return (point - center) / radius;
 }
 
-Color Sphere::colorAt(const Point& point) const {
-    return color;
-}
-
-Sphere::Sphere(Point center, float radius, Color color) : center(center), radius(radius), color(color) {}
+Sphere::Sphere(Point center, float radius, Material material) : Object(material), center(center), radius(radius) {}
 
 /**
  * Finds the point where the line and sphere intersect.
@@ -52,6 +49,17 @@ Intersection Sphere::rayIntersection(const Line& ray, Interval tRange) const {
     }
     Point poi = ray.at(t);
     return Intersection(true, this, t, poi);
+}
+
+Point Sphere::worldToObjectSpace(const Point& point) const {
+    return point - center;
+}
+
+std::pair<double, double> Sphere::objectToTextureSpace(const Point& point) const {
+    Point p = point.normalize();
+    double u = 0.5f + atan2(p.z, p.x) / (2 * Constants::PI);
+    double v = 0.5f + asin(p.y) / Constants::PI;
+    return std::make_pair(u, v);
 }
 
 void Sphere::translate(float x, float y, float z) {

@@ -1,6 +1,6 @@
 #include "Frame.h"
 #include "Vec3.h"
-#include "Colors.h"
+#include "Color.h"
 #include "ImageUtil.h"
 #include "MathUtil.h"
 

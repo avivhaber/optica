@@ -4,7 +4,7 @@
 #include "Sphere.h"
 #include "ImageUtil.h"
 #include "MathUtil.h"
-#include "Colors.h"
+#include "Color.h"
 #include "Vec3.h"
 #include "Exceptions.h"
 #include <iostream>
@@ -43,10 +43,10 @@ Color Scene::getRayColor(const Line& ray, int depth) {
     Intersection closest = getClosest(ray);
     if (closest.hit) {
         Vec3 N = closest.obj->normalAt(closest.point);
-        Line nextRay = renderer.sampler->sampleNextRay(closest.point, N);
+        Line nextRay = closest.obj->material.sampleNextRay(ray, closest.point, N);
         //float cosTheta = Vec3::dot(nextRay.direction.normalize(), N);
         //return closest.obj->colorAt(closest.point) * cosTheta;
-        return closest.obj->colorAt(closest.point) * getRayColor(nextRay, depth+1) * Constants::ONE_OVER_PI;
+        return closest.obj->getTextureColor(closest.point) * getRayColor(nextRay, depth+1) * renderer.reflectance;
     }
     return background(ray);
 }

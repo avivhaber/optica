@@ -1,10 +1,8 @@
 #pragma once
-#include "Sampler.h"
-#include "Colors.h"
+#include "Color.h"
 
 #include <cmath>
 
-// Constants and utilty functions for the renderer. The actual path tracer is in scene.h
 class Renderer {
     public:
         /**
@@ -30,11 +28,11 @@ class Renderer {
         */ 
         float tMin {0.0001};
         /**
-         * Function which generates a random hemispherical direction given an intersection.
+         * Fraction of light that remains after each reflection.
         */ 
-        const Sampler* sampler;
+        float reflectance {0.5f};
 
-        Renderer(int spp = 10, int maxDepth = 20, const Sampler* sampler = &Samplers::rejection);
+        Renderer(int spp = 10, int maxDepth = 20);
 
         Color gammaCorrect(const Color& in) const;
 };
