@@ -38,8 +38,8 @@ class Renderer {
   float reflectance{0.5f};
 
   Renderer(int width, int height, int samplesPerPixel = 100, int maxDepth = 20);
-  Renderer(int width, int height, float fov, float focalLength, int samplesPerPixel = 100,
-           int maxDepth = 20);
+  Renderer(int width, int height, float fov, float focalLength,
+           int samplesPerPixel = 100, int maxDepth = 20);
   Renderer(const Camera& camera, int samplesPerPixel = 100, int maxDepth = 20);
 
   // Renders the scene and saves the rendered image to disk.
