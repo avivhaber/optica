@@ -8,28 +8,26 @@
 #include "Vec3.h"
 
 int main() {
-  int x = 1280;
-  int y = 720;
+  int x = 1920;
+  int y = 1080;
   Scene scene;
   Renderer renderer(x, y);
-  renderer.samplesPerPixel = 100;
+  renderer.samplesPerPixel = 2000;
 
-  auto blue = std::make_shared<Sphere>(
-      Point(0, 0, 2), 0.5,
-      Material(
-          Textures::CHECKERBOARD(Colors::DARK_BLUE, Colors::LIGHT_CYAN, 0.05)));
-  auto red = std::make_shared<Sphere>(
-      Point(1, 0, 3), 0.5,
-      Material(Colors::SALMON, Materials::FUZZY_MIRROR(0)));
-  auto green = std::make_shared<Sphere>(Point(-0.5, 0.5, 1.3), 0.5,
-                                        Colors::BRIGHT_GREEN);
-  auto floor = std::make_shared<Plane>(
-      Vec3(0, 1, 0), -0.5, Intervals::inf, Intervals::inf, Interval(-1, 10),
-      Material(Textures::CHECKERBOARD(Colors::WHITE, Colors::RED, 0.6)));
+  Material blueCheckerboard(Textures::CHECKERBOARD(Colors::DARK_BLUE, Colors::LIGHT_CYAN, 0.05));
+  Material redCheckerboard(Textures::CHECKERBOARD(Colors::WHITE, Colors::RED, 0.6));
+  Material pinkMirror(Colors::SALMON, Materials::FUZZY_MIRROR(0.1));
+  float sphereRadius = 0.5f;
 
-  scene.add(blue, "sphere1");
-  scene.add(red, "sphere2");
-  scene.add(green, "sphere3");
+  auto green = std::make_shared<Sphere>(Point(-1, 0.2, 1.9), sphereRadius, Colors::BRIGHT_GREEN);
+  auto blue = std::make_shared<Sphere>(Point(0, 0, 2), sphereRadius, blueCheckerboard);
+  auto pink = std::make_shared<Sphere>(Point(1, 0, 3), sphereRadius, pinkMirror);
+  auto floor = std::make_shared<Plane>(Vec3(0, 1, 0), -0.5, Intervals::inf, Intervals::inf,
+                                       Interval(-1, 10), redCheckerboard);
+
+  scene.add(green, "sphere1");
+  scene.add(blue, "sphere2");
+  scene.add(pink, "sphere3");
   scene.add(floor, "floor");
 
   renderer.render(scene);
