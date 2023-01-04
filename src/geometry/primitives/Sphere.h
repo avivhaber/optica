@@ -19,5 +19,4 @@ class Sphere : public Object {
   Intersection rayIntersection(const Line& ray, Interval tRange = Interval()) const override;
   Point worldToObjectSpace(const Point& point) const override;
   std::pair<double, double> objectToTextureSpace(const Point& point) const override;
-  void translate(float x, float y, float z);
 };

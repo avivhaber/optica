@@ -30,7 +30,7 @@ class Object {
     double u;
     double v;
     std::tie(u, v) = objectToTextureSpace(worldToObjectSpace(point));
-    return material.texture(u, v, point);
+    return material.texture(u, v);
   }
   Object(Material material = Material()) : material(material) {}
   virtual ~Object() = default;

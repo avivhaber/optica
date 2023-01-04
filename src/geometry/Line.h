@@ -1,6 +1,7 @@
 #pragma once
 #include "Vec3.h"
 
+// Used for representing rays.
 class Line {
  public:
   Point origin;

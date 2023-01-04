@@ -12,13 +12,14 @@
 using BackgroundGenerator = std::function<Color(const Line&)>;
 
 namespace Backgrounds {
+
 // Displays a single color.
-inline BackgroundGenerator simpleBackground(const Color& color) {
+inline BackgroundGenerator SIMPLE_COLOR(const Color& color) {
   return [color](const Line& ray) { return color; };
 }
 
 // Displays a gradient based off ray's y-value.
-inline BackgroundGenerator gradientBackground(const Color& bottom, const Color& top) {
+inline BackgroundGenerator GRADIENT(const Color& bottom, const Color& top) {
   return [bottom, top](const Line& ray) {
     Vec3 dir = ray.direction.normalize();
     float t = (dir.y + 1.0f) / 2.0f;
@@ -27,9 +28,9 @@ inline BackgroundGenerator gradientBackground(const Color& bottom, const Color& 
 }
 
 // Dispays a white and light-blue sky. Default background implementation.
-inline BackgroundGenerator blueSky() {
+inline BackgroundGenerator BLUE_SKY() {
   Color bottom = Colors::WHITE;
   Color top = Colors::SKY_BLUE;
-  return gradientBackground(bottom, top);
+  return GRADIENT(bottom, top);
 }
 }  // namespace Backgrounds

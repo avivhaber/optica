@@ -6,35 +6,26 @@
 
 #include <cmath>
 
+// Core renderer. Takes in a scene and renders an image.
 class Renderer {
  public:
   Camera camera;
-  /**
-   * The renderer will shoot many randomly perturbed rays for each pixel and
-   * then average out the result. This value determines how many samples for
-   * each pixel. A higher value will give a sharper and less noisy image, at the
-   * cost of an increased render time.
-   */
+  // The renderer will shoot many randomly perturbed rays for each pixel and
+  // then average out the result. This value determines how many samples for
+  // each pixel. A higher value will give a sharper and less noisy image, at the
+  // cost of an increased render time.
   int samplesPerPixel;
-  /**
-   * Max recursion depth of the ray tracer. A higher value will give more
-   * accurate reflections and potentially more accurate shadows, at the cost of
-   * increase render time.
-   */
+  // Max recursion depth of the ray tracer. A higher value will give more
+  // accurate reflections and potentially more accurate shadows, at the cost of
+  // increase render time.
   int maxDepth;
-  /**
-   * Used for gamma color correction.
-   */
+  // Parameter used for gamma color correction.
   float gamma{2.0};
-  /**
-   * Threshold value for detecting if an intersection occured.
-   * Ensures that ray originating from object does not intersect with itself.
-   */
+  // Threshold value for detecting if an intersection occurred.
+  // Ensures that ray originating from object does not intersect with itself.
   float tMin{0.0001};
   const Interval hitInterval{Interval(tMin)};
-  /**
-   * Fraction of light that remains after each reflection.
-   */
+  // Fraction of light that remains after each reflection.
   float reflectance{0.5f};
 
   Renderer(int width, int height, int samplesPerPixel = 100, int maxDepth = 20);
@@ -57,8 +48,8 @@ class Renderer {
   Color traceRay(const Line& ray, int depth, const Scene& scene) const;
   // Returns the closest object that intersects with the ray.
   // The "hit" field of the returned object is false iff
-  // no intersection occured.
+  // no intersection occurred.
   Intersection getClosestIntersection(const Line& ray, const Scene& scene) const;
-  // Color correct to make it more realistic. colorOut = colorIn ^ (1/gamma).
+  // Color correction to make result more realistic. colorOut = colorIn ^ (1/gamma).
   Color gammaCorrect(const Color& in) const;
 };

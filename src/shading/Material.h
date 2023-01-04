@@ -14,9 +14,10 @@
 using Sampler = std::function<Line(const Line&, const Point&, const Vec3&)>;
 
 namespace Materials {
+
 // Ignores the incoming ray, meaning that the material appears roughly equally
 // bright from all angles. Works by sampling a point inside the unit sphere then
-// adding it to the normal. This makes reflections at extreme angles are less
+// adding it to the normal. This makes reflections at extreme angles less
 // likely to occur.
 inline Line DIFFUSE(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 ran;
@@ -28,22 +29,22 @@ inline Line DIFFUSE(const Line& incoming, const Point& hit, const Vec3& normal) 
 }
 
 // Variation of the previous that samples a random point on the unit sphere
-// instead of inside it.
+// instead of inside it. Results in a slightly brighter look, but is technically
+// more true-to-life.
 inline Line DIFFUSE2(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 ran = Vec3::randomUnitVec();
   if (ran.nearZero()) ran = Vec3(0, 0, 0);
   return Line(hit, normal + ran);
 }
 
-// Reflective mirror material. Angle of incidence == Angle of reflection.
-// For a perfect mirror, the color should be pure white.
+// Perfectly reflective mirror material. Angle of incidence == Angle of reflection.
 inline Line MIRROR(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
   return Line(hit, reflected);
 }
 
 // Like the normal mirror, but with some perturbation.
-// A fuzziness too high will cause visual bugs.
+// A fuzziness value that's too high may cause visual bugs.
 inline Sampler FUZZY_MIRROR(float fuzziness) {
   return [fuzziness](const Line& incoming, const Point& hit, const Vec3& normal) {
     Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
@@ -52,7 +53,7 @@ inline Sampler FUZZY_MIRROR(float fuzziness) {
   };
 }
 
-// Samples a random point inside the hemisphere at the hit point. Doesn't take
+// Samples a random point inside the hemisphere centred at the hit point. Doesn't take
 // into account the incoming ray or the normal. Looks very unrealistic.
 inline Line NAIVE(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 v = Vec3::randVec(-1, 1);
@@ -61,7 +62,7 @@ inline Line NAIVE(const Line& incoming, const Point& hit, const Vec3& normal) {
 }
 }  // namespace Materials
 
-// Material determines how an object is shaded, indepdendent of its geometry.
+// Material determines how an object is shaded.
 class Material {
  public:
   Texture texture;

@@ -20,7 +20,7 @@ class Camera {
   /**
    * Works the same as getcamerRay, but the returned ray will point to a
    * uniformly random position in the specified pixel. This function is useful
-   * for supersmapling. Ensure that 0<=xIndex<=imageWidth-1 and
+   * for supersampling. Ensure that 0<=xIndex<=imageWidth-1 and
    * 0<=yIndex<=imageHeight-1. (0, 0) represents the bottom left pixel, and
    * (imageWidth-1, imageHeight-1) represents the top right pixel.
    */
@@ -40,14 +40,12 @@ class Camera {
  private:
   int imageWidth;         // Image width in pixels.
   int imageHeight;        // Image height in pixels.
-  float focalLength;      // Distance from the camera's focal point to the image
-                          // plane.
+  float focalLength;      // Distance from the camera's focal point to the image plane.
   float horizontalFov;    // Angle in radians of the horizontal field-of-view.
   float viewportWidth;    // Width of the image plane.
   float viewportHeight;   // Height of the image plane.
   float pixelSize;        // Side length of a pixel on the image plane.
-  Point bottomLeftPixel;  // World space location of the center of the bottom
-                          // left pixel.
+  Point bottomLeftPixel;  // World space location of the center of the bottom-left pixel.
 
   // If any setter is called, all the variables need to be recomputed.
   void updateCameraVariables();

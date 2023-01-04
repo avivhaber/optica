@@ -48,9 +48,3 @@ std::pair<double, double> Sphere::objectToTextureSpace(const Point& point) const
   double v = 0.5f + std::asin(p.y) / Constants::PI;
   return std::make_pair(u, v);
 }
-
-void Sphere::translate(float x, float y, float z) {
-  center.x += x;
-  center.y += y;
-  center.z += z;
-}
