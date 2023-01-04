@@ -36,7 +36,7 @@ void Renderer::render(const Scene& scene) {
     for (int x = 0; x < f.width; x++) {
       ColorSet c;
       for (int i = 0; i < samplesPerPixel; i++) {
-        Line ray = camera.getCameraRayPertrubed(x, y);
+        Line ray = camera.getCameraRayPerturbed(x, y);
         c.add(traceRay(ray, 1, scene));
       }
       f.buffer[x][y] = gammaCorrect(c.average());

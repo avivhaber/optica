@@ -24,7 +24,7 @@ class Camera {
    * 0<=yIndex<=imageHeight-1. (0, 0) represents the bottom left pixel, and
    * (imageWidth-1, imageHeight-1) represents the top right pixel.
    */
-  Line getCameraRayPertrubed(int xIndex, int yIndex);
+  Line getCameraRayPerturbed(int xIndex, int yIndex);
 
   float getFocalLength() const;      // Gets the focal length (distance from image
                                      // plane to focal point).

@@ -8,11 +8,11 @@
 #include "Vec3.h"
 
 int main() {
-  int x = 1920;
-  int y = 1080;
+  int x = 1280;
+  int y = 720;
   Scene scene;
   Renderer renderer(x, y);
-  renderer.samplesPerPixel = 2000;
+  renderer.samplesPerPixel = 100;
 
   Material blueCheckerboard(Textures::CHECKERBOARD(Colors::DARK_BLUE, Colors::LIGHT_CYAN, 0.05));
   Material redCheckerboard(Textures::CHECKERBOARD(Colors::WHITE, Colors::RED, 0.6));

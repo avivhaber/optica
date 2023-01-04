@@ -27,7 +27,7 @@ inline BackgroundGenerator GRADIENT(const Color& bottom, const Color& top) {
   };
 }
 
-// Dispays a white and light-blue sky. Default background implementation.
+// Displays a white and light-blue sky. Default background implementation.
 inline BackgroundGenerator BLUE_SKY() {
   Color bottom = Colors::WHITE;
   Color top = Colors::SKY_BLUE;

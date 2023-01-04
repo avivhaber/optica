@@ -18,7 +18,7 @@ Line Camera::getCameraRay(float xIndex, float yIndex) {
   return Line(position, pixel - position);
 }
 
-Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) {
+Line Camera::getCameraRayPerturbed(int xIndex, int yIndex) {
   float xoff = MathUtil::rand() - 0.5f;
   float yoff = MathUtil::rand() - 0.5f;
   return getCameraRay(xIndex + xoff, yIndex + yoff);
@@ -26,7 +26,7 @@ Line Camera::getCameraRayPertrubed(int xIndex, int yIndex) {
 
 void Camera::updateCameraVariables() {
   float invAspectRatio = (float)(imageHeight - 1) / (float)(imageWidth - 1);
-  viewportWidth = 2 * focalLength * tan(horizontalFov / 2.0f);
+  viewportWidth = 2 * focalLength * std::tan(horizontalFov / 2.0f);
   viewportHeight = viewportWidth * invAspectRatio;
   pixelSize = viewportWidth / (imageWidth - 1);
   bottomLeftPixel = position;
