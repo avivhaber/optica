@@ -15,10 +15,8 @@ class Scene {
   void remove(const std::string& identifier);
   // Returns a shared_ptr of the scene object corresponding to the identifier.
   std::shared_ptr<Object> operator[](const std::string& identifier) const;
-  std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator
-  begin() const;
-  std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator end()
-      const;
+  std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator begin() const;
+  std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator end() const;
 
   BackgroundGenerator background = Backgrounds::blueSky();
 

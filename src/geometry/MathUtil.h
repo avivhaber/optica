@@ -17,14 +17,10 @@ namespace MathUtil {
 inline float toRads(float deg) { return deg * Constants::PI_OVER_180; }
 
 // Clips num so that it's between min and max.
-inline float clip(float num, float min, float max) {
-  return std::min(max, std::max(min, num));
-}
+inline float clip(float num, float min, float max) { return std::min(max, std::max(min, num)); }
 
 // Linearly interpolate between x0 and x1 according to parameter t.
-inline double lerp(double x0, double x1, double t) {
-  return (1 - t) * x0 + t * x1;
-}
+inline double lerp(double x0, double x1, double t) { return (1 - t) * x0 + t * x1; }
 
 // Returns a random float in the range [0,1)
 inline float rand() {

@@ -16,8 +16,7 @@ inline Texture COLOR(const Color& color) {
   return [color](double u, double v, const Point& point) { return color; };
 }
 
-inline Texture CHECKERBOARD(const Color& color1, const Color& color2,
-                            float squareWidth) {
+inline Texture CHECKERBOARD(const Color& color1, const Color& color2, float squareWidth) {
   return [color1, color2, squareWidth](double u, double v, const Point& point) {
     bool cx = std::abs(std::fmod(u, 2.0f * squareWidth)) < (squareWidth);
     cx = u < 0 ? !cx : cx;

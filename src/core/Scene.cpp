@@ -20,11 +20,9 @@ std::shared_ptr<Object> Scene::operator[](const std::string& identifier) const {
   return objects.at(identifier);
 }
 
-std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator
-Scene::begin() const {
+std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator Scene::begin() const {
   return objects.cbegin();
 }
-std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator
-Scene::end() const {
+std::unordered_map<std::string, std::shared_ptr<Object>>::const_iterator Scene::end() const {
   return objects.cend();
 }

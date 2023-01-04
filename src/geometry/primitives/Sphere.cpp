@@ -6,9 +6,7 @@
 #include "Object.h"
 #include "Vec3.h"
 
-Vec3 Sphere::normalAt(const Point& point) const {
-  return (point - center) / radius;
-}
+Vec3 Sphere::normalAt(const Point& point) const { return (point - center) / radius; }
 
 Sphere::Sphere(Point center, float radius, Material material)
     : Object(material), center(center), radius(radius) {}
@@ -42,12 +40,9 @@ Intersection Sphere::rayIntersection(const Line& ray, Interval tRange) const {
   return Intersection(true, t, poi);
 }
 
-Point Sphere::worldToObjectSpace(const Point& point) const {
-  return point - center;
-}
+Point Sphere::worldToObjectSpace(const Point& point) const { return point - center; }
 
-std::pair<double, double> Sphere::objectToTextureSpace(
-    const Point& point) const {
+std::pair<double, double> Sphere::objectToTextureSpace(const Point& point) const {
   Point p = point.normalize();
   double u = 0.5f + std::atan2(p.z, p.x) / (2 * Constants::PI);
   double v = 0.5f + std::asin(p.y) / Constants::PI;

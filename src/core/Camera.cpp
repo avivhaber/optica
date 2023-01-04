@@ -3,8 +3,7 @@
 #include "Line.h"
 #include "Vec3.h"
 
-Camera::Camera(int imageWidth, int imageHeight, float horizontalFov,
-               float focalLength)
+Camera::Camera(int imageWidth, int imageHeight, float horizontalFov, float focalLength)
     : imageWidth(imageWidth),
       imageHeight(imageHeight),
       focalLength(focalLength),

@@ -8,12 +8,10 @@
 #include "Scene.h"
 
 Renderer::Renderer(int width, int height, int samplesPerPixel, int maxDepth)
-    : camera(Camera(width, height)),
-      samplesPerPixel(samplesPerPixel),
-      maxDepth(maxDepth) {}
+    : camera(Camera(width, height)), samplesPerPixel(samplesPerPixel), maxDepth(maxDepth) {}
 
-Renderer::Renderer(int width, int height, float fov, float focalLength,
-                   int samplesPerPixel, int maxDepth)
+Renderer::Renderer(int width, int height, float fov, float focalLength, int samplesPerPixel,
+                   int maxDepth)
     : camera(Camera(width, height, fov, focalLength)),
       samplesPerPixel(samplesPerPixel),
       maxDepth(maxDepth) {}
@@ -21,8 +19,8 @@ Renderer::Renderer(int width, int height, float fov, float focalLength,
 Renderer::Renderer(const Camera& camera, int samplesPerPixel, int maxDepth)
     : camera(camera), samplesPerPixel(samplesPerPixel), maxDepth(maxDepth) {}
 
-void Renderer::renderKeyFrameAnimation(const Scene& scene, float& property,
-                                       float endVal, int numFrames) {
+void Renderer::renderKeyFrameAnimation(const Scene& scene, float& property, float endVal,
+                                       int numFrames) {
   float delta = (endVal - property) / ((float)numFrames);
   render(scene);
   for (int i = 0; i < numFrames; i++) {
@@ -61,14 +59,12 @@ Color Renderer::traceRay(const Line& ray, int depth, const Scene& scene) const {
     auto obj = scene[closest.objectId];
     Vec3 N = obj->normalAt(closest.point);
     Line nextRay = obj->material.sampleNextRay(ray, closest.point, N);
-    return obj->getTextureColor(closest.point) *
-           traceRay(nextRay, depth + 1, scene) * reflectance;
+    return obj->getTextureColor(closest.point) * traceRay(nextRay, depth + 1, scene) * reflectance;
   }
   return scene.background(ray);
 }
 
-Intersection Renderer::getClosestIntersection(const Line& ray,
-                                              const Scene& scene) const {
+Intersection Renderer::getClosestIntersection(const Line& ray, const Scene& scene) const {
   Intersection closestHit(false);
   std::string closestId;
   for (auto& entry : scene) {

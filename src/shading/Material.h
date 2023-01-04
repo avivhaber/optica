@@ -18,8 +18,7 @@ namespace Materials {
 // bright from all angles. Works by sampling a point inside the unit sphere then
 // adding it to the normal. This makes reflections at extreme angles are less
 // likely to occur.
-inline Line DIFFUSE(const Line& incoming, const Point& hit,
-                    const Vec3& normal) {
+inline Line DIFFUSE(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 ran;
   while (true) {
     ran = Vec3::randVec(-1, 1);
@@ -30,8 +29,7 @@ inline Line DIFFUSE(const Line& incoming, const Point& hit,
 
 // Variation of the previous that samples a random point on the unit sphere
 // instead of inside it.
-inline Line DIFFUSE2(const Line& incoming, const Point& hit,
-                     const Vec3& normal) {
+inline Line DIFFUSE2(const Line& incoming, const Point& hit, const Vec3& normal) {
   Vec3 ran = Vec3::randomUnitVec();
   if (ran.nearZero()) ran = Vec3(0, 0, 0);
   return Line(hit, normal + ran);
@@ -40,21 +38,18 @@ inline Line DIFFUSE2(const Line& incoming, const Point& hit,
 // Reflective mirror material. Angle of incidence == Angle of reflection.
 // For a perfect mirror, the color should be pure white.
 inline Line MIRROR(const Line& incoming, const Point& hit, const Vec3& normal) {
-  Vec3 reflected =
-      incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
+  Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
   return Line(hit, reflected);
 }
 
 // Like the normal mirror, but with some perturbation.
 // A fuzziness too high will cause visual bugs.
 inline Sampler FUZZY_MIRROR(float fuzziness) {
-  return
-      [fuzziness](const Line& incoming, const Point& hit, const Vec3& normal) {
-        Vec3 reflected = incoming.direction -
-                         normal * (2 * Vec3::dot(incoming.direction, normal));
-        reflected += Vec3::randomUnitVec() * fuzziness;
-        return Line(hit, reflected);
-      };
+  return [fuzziness](const Line& incoming, const Point& hit, const Vec3& normal) {
+    Vec3 reflected = incoming.direction - normal * (2 * Vec3::dot(incoming.direction, normal));
+    reflected += Vec3::randomUnitVec() * fuzziness;
+    return Line(hit, reflected);
+  };
 }
 
 // Samples a random point inside the hemisphere at the hit point. Doesn't take

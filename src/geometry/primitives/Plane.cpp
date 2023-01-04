@@ -3,8 +3,7 @@
 
 Vec3 Plane::normalAt(const Point& point) const { return normal; }
 
-Plane::Plane(Vec3 normal, float D, Interval x, Interval y, Interval z,
-             Material material)
+Plane::Plane(Vec3 normal, float D, Interval x, Interval y, Interval z, Material material)
     : Object(material), xRange(x), yRange(y), zRange(z) {
   float len = normal.length();
   this->normal = normal / len;
@@ -44,7 +43,6 @@ Point Plane::worldToObjectSpace(const Point& point) const {
   return Point(x, y, 0);
 }
 
-std::pair<double, double> Plane::objectToTextureSpace(
-    const Point& point) const {
+std::pair<double, double> Plane::objectToTextureSpace(const Point& point) const {
   return std::make_pair(point.x, point.y);
 }

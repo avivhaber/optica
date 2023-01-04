@@ -18,8 +18,7 @@ inline BackgroundGenerator simpleBackground(const Color& color) {
 }
 
 // Displays a gradient based off ray's y-value.
-inline BackgroundGenerator gradientBackground(const Color& bottom,
-                                              const Color& top) {
+inline BackgroundGenerator gradientBackground(const Color& bottom, const Color& top) {
   return [bottom, top](const Line& ray) {
     Vec3 dir = ray.direction.normalize();
     float t = (dir.y + 1.0f) / 2.0f;

@@ -38,8 +38,8 @@ class Renderer {
   float reflectance{0.5f};
 
   Renderer(int width, int height, int samplesPerPixel = 100, int maxDepth = 20);
-  Renderer(int width, int height, float fov, float focalLength,
-           int samplesPerPixel = 100, int maxDepth = 20);
+  Renderer(int width, int height, float fov, float focalLength, int samplesPerPixel = 100,
+           int maxDepth = 20);
   Renderer(const Camera& camera, int samplesPerPixel = 100, int maxDepth = 20);
 
   // Renders the scene and saves the rendered image to disk.
@@ -48,8 +48,7 @@ class Renderer {
   // off numFrames. "property" is passed by reference and modified in this
   // function. It can be any kind of scene or renderer parameter. Renders
   // numFrames + 1 frames in total.
-  void renderKeyFrameAnimation(const Scene& scene, float& property,
-                               float endVal, int numFrames);
+  void renderKeyFrameAnimation(const Scene& scene, float& property, float endVal, int numFrames);
 
  private:
   int currentFrame = 1;
@@ -59,8 +58,7 @@ class Renderer {
   // Returns the closest object that intersects with the ray.
   // The "hit" field of the returned object is false iff
   // no intersection occured.
-  Intersection getClosestIntersection(const Line& ray,
-                                      const Scene& scene) const;
+  Intersection getClosestIntersection(const Line& ray, const Scene& scene) const;
   // Color correct to make it more realistic. colorOut = colorIn ^ (1/gamma).
   Color gammaCorrect(const Color& in) const;
 };

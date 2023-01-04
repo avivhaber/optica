@@ -8,8 +8,7 @@ class Sphere : public Object {
   Point center;
   float radius;
 
-  Sphere(Point center = Point(), float radius = 1,
-         Material material = Material());
+  Sphere(Point center = Point(), float radius = 1, Material material = Material());
   Vec3 normalAt(const Point& point) const override;
   /**
    * Finds the point where the line and sphere intersect.
@@ -17,10 +16,8 @@ class Sphere : public Object {
    * components). If there's 2 solutions, and both t's are positive, the smaller
    * one is returned. If not both positive, the greater t is returned.
    */
-  Intersection rayIntersection(const Line& ray,
-                               Interval tRange = Interval()) const override;
+  Intersection rayIntersection(const Line& ray, Interval tRange = Interval()) const override;
   Point worldToObjectSpace(const Point& point) const override;
-  std::pair<double, double> objectToTextureSpace(
-      const Point& point) const override;
+  std::pair<double, double> objectToTextureSpace(const Point& point) const override;
   void translate(float x, float y, float z);
 };

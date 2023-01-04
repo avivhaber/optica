@@ -7,8 +7,8 @@ class Camera {
  public:
   Point position{Point(0, 0, 0)};
 
-  Camera(int imageWidth, int imageHeight,
-         float horizontalFov = Constants::PI_OVER_2, float focalLength = 1);
+  Camera(int imageWidth, int imageHeight, float horizontalFov = Constants::PI_OVER_2,
+         float focalLength = 1);
 
   /**
    * Generates a ray originating from the camera and going through the center of
@@ -26,16 +26,14 @@ class Camera {
    */
   Line getCameraRayPertrubed(int xIndex, int yIndex);
 
-  float getFocalLength() const;    // Gets the focal length (distance from image
-                                   // plane to focal point).
-  void setFocalLength(float foc);  // Sets the focal length (distance from image
-                                   // plane to focal point).
-  float getHorizontalFov()
-      const;  // Gets the horizontal field-of-view, in radians.
-  void setHorizontalFov(
-      float fov);              // Sets the horizontal field-of-view, in radians.
-  int getImageWidth() const;   // Gets the image width, in pixels.
-  int getImageHeight() const;  // Gets the image height, in pixels.
+  float getFocalLength() const;      // Gets the focal length (distance from image
+                                     // plane to focal point).
+  void setFocalLength(float foc);    // Sets the focal length (distance from image
+                                     // plane to focal point).
+  float getHorizontalFov() const;    // Gets the horizontal field-of-view, in radians.
+  void setHorizontalFov(float fov);  // Sets the horizontal field-of-view, in radians.
+  int getImageWidth() const;         // Gets the image width, in pixels.
+  int getImageHeight() const;        // Gets the image height, in pixels.
   void setImageSize(int width,
                     int height);  // Sets the image width and height, in pixels.
 
