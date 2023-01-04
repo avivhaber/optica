@@ -23,13 +23,6 @@ $(BUILD_DIR)/%.cpp.o: %.cpp
 	$(MKDIR_P) $(dir $@)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -c $< -o $@
 
-$(OUT_DIR)/%.png: $(BUILD_DIR)/$(TARGET_EXEC)
-	./$(TARGET_EXEC)
-	convert $(basename $@).ppm $@
-
-$(OUT_DIR)/%.gif:
-	convert -delay 2 -loop 0 $(dir $@)*.ppm $@
-
 print-%  : ; @echo $* = $($*)
 
 .PHONY: all
