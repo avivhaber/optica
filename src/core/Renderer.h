@@ -1,9 +1,11 @@
 #pragma once
 #include "Camera.h"
 #include "Color.h"
+#include "Frame.h"
 #include "Intersection.h"
 #include "Scene.h"
 
+#include <atomic>
 #include <cmath>
 
 // Core renderer. Takes in a scene and renders an image.
@@ -34,7 +36,8 @@ class Renderer {
   Renderer(const Camera& camera, int samplesPerPixel = 100, int maxDepth = 20);
 
   // Renders the scene and saves the rendered image to disk.
-  void render(const Scene& scene);
+  void render(const Scene& scene, bool multithreading=true);
+  void renderingWorker(const Scene& scene, Frame& f, std::atomic<int>& currPixel);
   // Linearly interpolates "property" between its current value and endVal based
   // off numFrames. "property" is passed by reference and modified in this
   // function. It can be any kind of scene or renderer parameter. Renders
@@ -43,6 +46,7 @@ class Renderer {
 
  private:
   int currentFrame = 1;
+  Color renderPixel(const Scene& scene, int x, int y);
   // Core function of the ray tracer. Recursively traces the ray up to a maximum
   // recursion depth, and returns the color of the rendered ray.
   Color traceRay(const Line& ray, int depth, const Scene& scene) const;

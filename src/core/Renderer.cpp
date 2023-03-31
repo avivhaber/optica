@@ -1,11 +1,14 @@
 #include "Renderer.h"
 #include <cmath>
 #include <iostream>
+#include <thread>
 #include "Frame.h"
 #include "ImageUtil.h"
 #include "Intersection.h"
 #include "MathUtil.h"
 #include "Scene.h"
+
+using namespace std::placeholders;
 
 Renderer::Renderer(int width, int height, int samplesPerPixel, int maxDepth)
     : camera(Camera(width, height)), samplesPerPixel(samplesPerPixel), maxDepth(maxDepth) {}
@@ -29,26 +32,45 @@ void Renderer::renderKeyFrameAnimation(const Scene& scene, float& property, floa
   }
 }
 
-void Renderer::render(const Scene& scene) {
+void Renderer::render(const Scene& scene, bool multithreading) {
   Frame f(camera.getImageWidth(), camera.getImageHeight());
 
-  for (int y = 0; y < f.height; y++) {
-    for (int x = 0; x < f.width; x++) {
-      ColorSet c;
-      for (int i = 0; i < samplesPerPixel; i++) {
-        Line ray = camera.getCameraRayPerturbed(x, y);
-        c.add(traceRay(ray, 1, scene));
-      }
-      f.buffer[x][y] = gammaCorrect(c.average());
-    }
-    // Update render progress
-    int percentFinished = (100 * (y + 1)) / f.height;
-    std::cout << "\rRendering frame " << currentFrame << "..."
-              << " (" << percentFinished << "%)" << std::flush;
+  int numThreads = multithreading ? std::thread::hardware_concurrency() : 1;
+  numThreads = std::max(numThreads, 1);
+  std::atomic<int> currPixel(f.width * f.height - 1);
+  std::vector<std::thread> threads;
+  for (int i = 0; i < numThreads; i++) {
+    threads.emplace_back(std::bind(&Renderer::renderingWorker, this, _1, _2, _3), std::cref(scene), std::ref(f), std::ref(currPixel));
   }
+  for (auto& t : threads) {
+    t.join();
+  }
+
+  //std::cout << "\rRendering frame " << currentFrame << "..." << " (" << percentFinished << "%)" << std::flush;
   ImageUtil::writeImage(f, "render", currentFrame);
   currentFrame++;
   std::cout << std::endl;
+}
+
+void Renderer::renderingWorker(const Scene& scene, Frame& f, std::atomic<int>& currPixel) {
+  while (true) {
+    int pixel = currPixel--;
+    if (pixel < 0) {
+      break;
+    }
+    int x = pixel % f.width;
+    int y = pixel / f.width;
+    f.buffer[x][y] = renderPixel(scene, x, y);
+  }
+}
+
+Color Renderer::renderPixel(const Scene& scene, int x, int y) {
+  ColorSet c;
+  for (int i = 0; i < samplesPerPixel; i++) {
+    Line ray = camera.getCameraRayPerturbed(x, y);
+    c.add(traceRay(ray, 1, scene));
+  }
+  return gammaCorrect(c.average());
 }
 
 Color Renderer::traceRay(const Line& ray, int depth, const Scene& scene) const {
